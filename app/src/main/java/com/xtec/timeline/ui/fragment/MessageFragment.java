@@ -44,6 +44,8 @@ public class MessageFragment extends Fragment {
         View topBar = view.findViewById(R.id.message_topbar);
         UIUtils.initTopbar(getActivity(), topBar, false);
 
+        ((TextView)topBar.findViewById(R.id.topbar_title)).setText("消息");
+
 
         ButterKnife.bind(this, view);
         return view;

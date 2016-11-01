@@ -13,13 +13,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.xtec.timeline.R;
+import com.xtec.timeline.common.UpdateManager;
 import com.xtec.timeline.ui.fragment.FootprintFragment;
 import com.xtec.timeline.ui.fragment.FriendsFragment;
 import com.xtec.timeline.ui.fragment.MessageFragment;
 import com.xtec.timeline.ui.fragment.MoreFragment;
 import com.xtec.timeline.utils.L;
-import com.xtec.timeline.utils.T;
-import com.xtec.timeline.widget.FastDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,33 +48,14 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 //        getSwipeBackLayout().setEnableGesture(false);
         mainRg.setOnCheckedChangeListener(this);
         mainRbFootprint.setChecked(true);
-        showTipsDialog();
+        //检查版本更新
+        UpdateManager.checkNewVersion(this,true);
     }
 
-    private void showTipsDialog() {
-        new FastDialog(this)
-                .setTitle("测试标题")
-                .setContent("1.这是第一个版本测试;\n2.有什么bug及时反馈;\n3.就算反馈了也不会修复的^_^")
-                .setPositiveButton("立即举报", new FastDialog.OnClickListener() {
-                    @Override
-                    public void onClick(FastDialog dialog) {
-                        T.showShort(MainActivity.this, "举报成功...");
-                    }
-                })
-                .setNegativeButton("默默离开", new FastDialog.OnClickListener() {
-                    @Override
-                    public void onClick(FastDialog dialog) {
-                        T.showShort(MainActivity.this, "走好不送...");
-                    }
-                })
-                .setCancelable(false)
-                .setCanceledOnTouchOutside(false)
-                .create().show();
-    }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-        L.e("reyzarc",checkedId+"---->");
+        L.e("reyzarc", checkedId + "---->");
         switch (checkedId) {
             case R.id.main_rb_footprint://足迹
                 switchStatusBarColor(true);
@@ -84,8 +64,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                     mFootprintFragment = new FootprintFragment();
                 }
                 switchFragment(mFootprintFragment);
-
-
                 break;
             case R.id.main_rb_message://消息
                 mainRbMessage.setChecked(true);
@@ -116,25 +94,26 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
 
     /**
      * 切换状态栏样式
+     *
      * @param isTransparent 状态栏是否透明
      */
     private void switchStatusBarColor(boolean isTransparent) {
         //统一将状态栏颜色设置为透明,让fragment或者activity的topbar自己去控制颜色显示,从而有效避免切换时引起的视觉上的状态栏闪跳
 //        if (isTransparent){//状态栏全透明
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
 //                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.TRANSPARENT);
-            }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4 全透明状态栏和导航栏
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4 全透明状态栏和导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            } else {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams
-                        .FLAG_FULLSCREEN);
-            }
+        } else {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams
+                    .FLAG_FULLSCREEN);
+        }
 //        }
 //        else{//状态栏主题色
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0 全透明实现
