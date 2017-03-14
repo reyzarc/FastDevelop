@@ -15,5 +15,60 @@
         <attr name="shadow_bottom" format="reference"/>
     </declare-styleable>
 
+    <!--格式化edittext自定义属性-->
+    <declare-styleable name="FormatEditText">
+        <!--格式化类型,电话/银行卡-->
+        <attr name="formatType">
+            <enum name="phoneNum" value="1"/>
+            <enum name="cardNum" value="2"/>
+        </attr>
+        <!--是否开启一键清除数据-->
+        <attr name="openOneKeyClear" format="boolean"/>
+        <!--是否开启格式化-->
+        <attr name="openFormat" format="boolean"/>
+    </declare-styleable>
+
+    <!--多种状态布局view-->
+    <declare-styleable name="MultiStateView">
+        <attr name="msv_loadingView" format="reference" />
+        <attr name="msv_emptyView" format="reference" />
+        <attr name="msv_errorView" format="reference" />
+        <attr name="msv_viewState" format="enum">
+            <enum name="content" value="0" />
+            <enum name="error" value="1" />
+            <enum name="empty" value="2" />
+            <enum name="loading" value="3" />
+        </attr>
+        <attr name="msv_animateViewChanges" format="boolean" />
+    </declare-styleable>
+
+    <!--圆形进度条style-->
+    <declare-styleable name="ProgressWheel">
+        <attr name="pwText" format="string" />
+        <attr name="pwTextColor" format="color" />
+        <attr name="pwTextSize" format="dimension" />
+        <attr name="pwBarColor" format="color" />
+        <attr name="pwRimColor" format="color" />
+        <attr name="pwRimWidth" format="dimension" />
+        <attr name="pwSpinSpeed" format="dimension" />
+        <attr name="pwDelayMillis" format="integer" />
+        <attr name="pwCircleColor" format="color" />
+        <attr name="pwRadius" format="dimension" />
+        <attr name="pwBarWidth" format="dimension" />
+        <attr name="pwBarLength" format="dimension" />
+        <attr name="pwContourColor" format="color"/>
+        <attr name="pwContourSize" format="dimension"/>
+    </declare-styleable>
+
+    <!--圆环进度-->
+    <declare-styleable name="CircularProgressBar">
+        <attr name="cpb_progress" format="integer" />
+        <attr name="cpb_progressbar_color" format="color" />
+        <attr name="cpb_background_progressbar_color" format="color" />
+        <attr name="cpb_progressbar_width" format="dimension" />
+        <attr name="cpb_background_progressbar_width" format="dimension" />
+    </declare-styleable>
+
+
     <attr name="SwipeBackLayoutStyle" format="reference"/>
 </resources>

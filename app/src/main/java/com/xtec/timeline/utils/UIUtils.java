@@ -2,13 +2,21 @@ package com.xtec.timeline.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xtec.timeline.R;
+import com.xtec.timeline.widget.PtrHeader;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * Created by 武昌丶鱼 on 2016/10/21.
@@ -135,5 +143,51 @@ public class UIUtils {
                 dotsContainer.addView(iv);
             }
         }
+    }
+
+    /**
+     * 设置textview中的文字局部颜色
+     *
+     * @param context
+     * @param textView
+     * @param content   要设置的文本
+     * @param textColor 要设置的颜色
+     * @param from      从第几个字符开始（0开始计数，中文1个字为一字符，英文一个字母为一字符，空格也计算）
+     * @param length    要设置的字符长度
+     */
+    public static void setTextColor(Context context, TextView textView, String content, int textColor, int from, int length) {
+        SpannableStringBuilder builder = new SpannableStringBuilder(content);
+        ForegroundColorSpan span = new ForegroundColorSpan(context.getResources().getColor(textColor));
+        if(from<content.length()&&from+length<=content.length()){
+            builder.setSpan(span, from,from+length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            textView.setText(builder);
+        }else{
+            textView.setText(content);
+        }
+    }
+
+
+    public static void ptrFrameAddHeader(Context context, PtrClassicFrameLayout ptrFrame) {
+
+        // header
+        final PtrHeader header = new PtrHeader(context);
+        header.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
+        header.setPadding(0, dip2px(context, 15), 0, dip2px(context, 10));
+//        int[] colors = context.getResources().getIntArray(R.array.google_colors);
+//        header.setColorSchemeColors(colors);
+//        header.setLayoutParams(new PtrFrameLayout.LayoutParams(-1, -2));
+//        header.setPadding(0, DensityUtil.dip2px(context,15), 0, DensityUtil.dip2px(context,10));
+//        header.setPtrFrameLayout(ptrFrame);
+
+        ptrFrame.setResistance(2.7f);
+        ptrFrame.setRatioOfHeaderHeightToRefresh(1.0f);
+        ptrFrame.setDurationToClose(150);
+        ptrFrame.setDurationToCloseHeader(500);
+        ptrFrame.setPullToRefresh(false);
+        ptrFrame.setKeepHeaderWhenRefresh(true);
+        ptrFrame.setHeaderView(header);
+        ptrFrame.addPtrUIHandler(header);
+        ptrFrame.disableWhenHorizontalMove(true);
+
     }
 }

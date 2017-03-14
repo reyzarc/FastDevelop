@@ -80,10 +80,12 @@ public class UpdateService extends Service{
                     stopSelf();
                     break;
                 case DOWNLOAD_CANCLE://下载取消
+                    nm.cancel(0);
                     stopSelf();
                     break;
                 case DOWNLOAD_FAILED://下载失败
                     T.showShort(UpdateService.this,"下载失败，请稍后重试！");
+                    nm.cancel(0);
                     stopSelf();
                     break;
             }
@@ -93,23 +95,26 @@ public class UpdateService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //notification的一些基本设置
-        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notification = new Notification();
-        notification.icon = android.R.drawable.stat_sys_download;
-        notification.tickerText = getString(R.string.app_name) + "正在更新";
-        notification.when = System.currentTimeMillis();
-        notification.defaults = Notification.DEFAULT_LIGHTS;
-        notification.flags = Notification.FLAG_ONGOING_EVENT;
-        //状态栏中下载时显示的view
-        contentView = new RemoteViews(getPackageName(), R.layout.layout_download_notify);
-        notification.contentView = contentView;
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(), 0);
-        notification.contentIntent = contentIntent;
-        nm.notify(0, notification);
+        if (intent != null) {
+            //notification的一些基本设置
+            nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notification = new Notification();
+            notification.icon = android.R.drawable.stat_sys_download;
+            notification.tickerText = getString(R.string.app_name) + "正在更新";
+            notification.when = System.currentTimeMillis();
+            notification.defaults = Notification.DEFAULT_LIGHTS;
+            notification.flags = Notification.FLAG_ONGOING_EVENT;
+            //状态栏中下载时显示的view
+            contentView = new RemoteViews(getPackageName(), R.layout.layout_download_notify);
+            notification.contentView = contentView;
 
-        downLoadFile(intent.getStringExtra("url"));
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, new Intent(), 0);
+            notification.contentIntent = contentIntent;
+            nm.notify(0, notification);
+
+            downLoadFile(intent.getStringExtra("url"));
+        }
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -147,8 +152,7 @@ public class UpdateService extends Service{
 
 
                 try {
-                    URL url = null;
-                    url = new URL(path);
+                    URL url = new URL(path);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setConnectTimeout(5000);
                     long length = conn.getContentLength();
@@ -168,7 +172,7 @@ public class UpdateService extends Service{
                     byte[] bytes = new byte[1024];
                     int len;
                     int total = 0;
-                    int percent = 0;
+                    int percent;
                     while ((len = bis.read(bytes)) != -1) {
                         fos.write(bytes, 0, len);
                         total += len;

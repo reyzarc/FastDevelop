@@ -20,7 +20,7 @@ import com.xtec.timeline.R;
  * Created by 武昌丶鱼 on 2016/10/14.
  * Description:自定义dialog
  */
-public class FastDialog{
+public class FastDialog {
 
     private static final String TAG = "FastDialog";
     private Context mContext;
@@ -33,6 +33,7 @@ public class FastDialog{
     private boolean mIsCancelable;
     private boolean mIsCancelOnTouchOutside;
     private Dialog mDialog;
+    private int mPositiveTextColor= R.color.black,mNegativeTextColor= R.color.black,mSingleTextColor = R.color.black;
 
     private TextView cancelText;
     private TextView confirmText;
@@ -110,6 +111,26 @@ public class FastDialog{
     }
 
     /**
+     * dialog的确定按钮
+     *
+     * @param positiveText
+     * @param onClickListener
+     * @return
+     */
+    public FastDialog setPositiveButton(String positiveText,int textColor,final OnClickListener onClickListener) {
+        mPositiveButtonText = positiveText;
+        mPositiveTextColor = textColor;
+        confirmText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+                onClickListener.onClick(FastDialog.this);
+            }
+        });
+        return this;
+    }
+
+    /**
      * dialog的取消按钮
      *
      * @param negativeText
@@ -129,12 +150,51 @@ public class FastDialog{
     }
 
     /**
+     * dialog的取消按钮
+     *
+     * @param negativeText
+     * @param onClickListener
+     * @return
+     */
+    public FastDialog setNegativeButton(String negativeText, int textColor,final OnClickListener onClickListener) {
+        mNegativeButtonText = negativeText;
+        mNegativeTextColor = textColor;
+        cancelText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+                onClickListener.onClick(FastDialog.this);
+            }
+        });
+        return this;
+    }
+
+    /**
      * dialog是否只有一个按钮
      *
      * @return
      */
     public FastDialog setSingleButton(String singleText, final OnClickListener onClickListener) {
         mSingleButtonText = singleText;
+        mIsSingleButton = true;
+        llSingle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+                onClickListener.onClick(FastDialog.this);
+            }
+        });
+        return this;
+    }
+
+    /**
+     * dialog是否只有一个按钮
+     *
+     * @return
+     */
+    public FastDialog setSingleButton(String singleText,int textColor, final OnClickListener onClickListener) {
+        mSingleButtonText = singleText;
+        mSingleTextColor = textColor;
         mIsSingleButton = true;
         llSingle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,11 +240,14 @@ public class FastDialog{
             llDouble.setVisibility(View.GONE);
             llSingle.setVisibility(View.VISIBLE);
             singleText.setText(mSingleButtonText);
+            singleText.setTextColor(mContext.getResources().getColor(mSingleTextColor));
         } else {//两个按钮的dialog
             llDouble.setVisibility(View.VISIBLE);
             llSingle.setVisibility(View.GONE);
             confirmText.setText(mPositiveButtonText);
             cancelText.setText(mNegativeButtonText);
+            confirmText.setTextColor(mContext.getResources().getColor(mPositiveTextColor));
+            cancelText.setTextColor(mContext.getResources().getColor(mNegativeTextColor));
         }
 
         contentText.setText(mContent);

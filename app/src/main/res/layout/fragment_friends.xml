@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
+    <include
+        android:id="@+id/friends_topbar"
+        layout="@layout/layout_top_bar"/>
+
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ptr_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ptr_duration_to_close="200"
+        app:ptr_duration_to_close_header="1000"
+        app:ptr_keep_header_when_refresh="true"
+        app:ptr_pull_to_fresh="false"
+        app:ptr_ratio_of_header_height_to_refresh="1.2"
+        app:ptr_resistance="1.7">
+
+        <com.xtec.timeline.widget.MultiStateView
+            android:id="@+id/mv_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/friends_topbar"
+            app:msv_emptyView="@layout/empty_view"
+            app:msv_errorView="@layout/error_view"
+            app:msv_loadingView="@layout/loading_view"
+            app:msv_viewState="content">
+
+            <TextView
+                android:textSize="20sp"
+                android:gravity="center"
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:divider="@color/gray"
+                android:layout_height="match_parent"/>
+
+        </com.xtec.timeline.widget.MultiStateView>
+
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 </LinearLayout>
