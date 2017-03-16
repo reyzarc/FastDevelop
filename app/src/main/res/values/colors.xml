@@ -13,4 +13,6 @@
     <color name="dots_container_color">#7a919191</color>
     <color name="green">#7a7</color>
     <color name="red">#ff0000</color>
+    <color name="blue">#3169ea</color>
+    <color name="translucent">#43000000</color>
 </resources>

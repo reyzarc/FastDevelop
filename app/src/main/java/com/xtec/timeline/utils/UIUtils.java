@@ -146,7 +146,7 @@ public class UIUtils {
     }
 
     /**
-     * 设置textview中的文字局部颜色
+     * 设置textView中的文字局部颜色
      *
      * @param context
      * @param textView
@@ -167,6 +167,11 @@ public class UIUtils {
     }
 
 
+    /**
+     * 下拉刷新的头部布局
+     * @param context
+     * @param ptrFrame
+     */
     public static void ptrFrameAddHeader(Context context, PtrClassicFrameLayout ptrFrame) {
 
         // header
@@ -188,6 +193,5 @@ public class UIUtils {
         ptrFrame.setHeaderView(header);
         ptrFrame.addPtrUIHandler(header);
         ptrFrame.disableWhenHorizontalMove(true);
-
     }
 }

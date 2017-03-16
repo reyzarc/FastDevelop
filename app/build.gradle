@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
@@ -28,6 +32,17 @@ android {
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为haowallet_v1.0_2016-03-11.apk
+                        def fileName = "xtech_v${defaultConfig.versionName}_${releaseTime()}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
     }
 

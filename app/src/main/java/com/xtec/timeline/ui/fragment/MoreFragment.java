@@ -40,6 +40,8 @@ public class MoreFragment extends Fragment {
 
         ((TextView) topBar.findViewById(R.id.topbar_title)).setText("更多");
 
+        topBar.setBackgroundColor(getResources().getColor(R.color.blue));
+
         ButterKnife.bind(this, view);
         return view;
     }
