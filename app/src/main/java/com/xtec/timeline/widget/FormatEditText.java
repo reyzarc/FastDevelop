@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -67,6 +68,8 @@ public class FormatEditText extends android.support.v7.widget.AppCompatEditText 
         mOpenFormat = ta.getBoolean(R.styleable.FormatEditText_openFormat,true);
 
         ta.recycle();
+
+        this.setInputType(InputType.TYPE_CLASS_NUMBER);
         if(mFormatType==0){//默认
             this.setFilters(new InputFilter[]{new InputFilter.LengthFilter(18)});
         }else if(mFormatType==1){//电话

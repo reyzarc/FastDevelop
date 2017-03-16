@@ -247,7 +247,7 @@
 
     </LinearLayout>
 
-    <com.ptp.hqb.widget.pwdkeyboard.VirtualKeyboardView
+    <com.xtec.timeline.widget.pwdkeyboard.VirtualKeyboardView
         android:id="@+id/virtualKeyboardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

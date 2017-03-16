@@ -46,6 +46,14 @@
             android:name=".ui.activity.NumKeyboardActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.activity.PayPwdEditTextActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.activity.FormatEditTextActivity"
+            android:screenOrientation="portrait"/>
+
         <service android:name=".service.UpdateService"/>
     </application>
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/layout_top_bar"/>
+
+    <com.xtec.timeline.widget.FormatEditText
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/gray_light"
+        android:padding="16dp"
+        app:formatType="phoneNum"
+        app:openFormat="true"
+        android:hint="手机号码,带一键清空"
+        app:openOneKeyClear="true"/>
+
+    <com.xtec.timeline.widget.FormatEditText
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/gray_light"
+        android:padding="16dp"
+        app:formatType="cardNum"
+        android:hint="卡号,不带一键清空"
+        app:openFormat="true"
+        app:openOneKeyClear="false"/>
+</LinearLayout>
