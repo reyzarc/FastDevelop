@@ -92,4 +92,14 @@ public class BaseActivity extends SwipeBackActivity{
     public void initTopbar(Context context,View topbar,boolean isEnableBack){
         UIUtils.initTopbarForActivity(context,topbar,isEnableBack);
     }
+
+    /**
+     * 初始化topbar,带topbar的颜色
+     * @param context 上下文
+     * @param topbar
+     * @param isEnableBack 是否激活返回按钮
+     */
+    public void initTopbar(Context context,View topbar,int color,boolean isEnableBack){
+        UIUtils.initTopbarForActivity(context,topbar,color,isEnableBack);
+    }
 }

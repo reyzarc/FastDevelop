@@ -103,7 +103,39 @@ public class UIUtils {
 
         if(isEnableBack){//有返回键
             ImageButton btn  = (ImageButton) topbar.findViewById(R.id.topbar_left);
-            btn.setImageResource(R.drawable.ic_back_arrow);
+            btn.setImageResource(R.drawable.ic_back_white);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((Activity)context).finish();
+                }
+            });
+        }
+    }
+
+    /**
+     * 初始化activity的topbar,带状态栏颜色
+     * @param context
+     * @param topbar
+     * @param color
+     * @param isEnableBack
+     */
+    public static void initTopbarForActivity(final Context context, View topbar,int color, boolean isEnableBack) {
+        ViewGroup.LayoutParams params = topbar.getLayoutParams();
+        params.height = getStatusBarHeight(context)+dip2px(context,50);
+        topbar.setLayoutParams(params);
+        topbar.setBackgroundColor(context.getResources().getColor(color));
+        if(color==R.color.white){//白色的状态栏,则将文字改为黑色
+            StatusbarUtil.setFontBlack((Activity) context,true);
+        }
+
+        if(isEnableBack){//有返回键
+            ImageButton btn  = (ImageButton) topbar.findViewById(R.id.topbar_left);
+            if(color==R.color.white){//白色的状态栏,则将文字改为黑色
+                btn.setImageResource(R.drawable.ic_back_black);
+            }else{
+                btn.setImageResource(R.drawable.ic_back_white);
+            }
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

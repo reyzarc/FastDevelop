@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/widget_demo_topbar"
+        layout="@layout/layout_top_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_num_keyboard"
+                style="@style/orange_btn_style"
+                android:text="数字键盘"/>
+            <Button
+                android:id="@+id/btn_pwd_edit_text"
+                style="@style/orange_btn_style"
+                android:text="仿微信密码输入框"/>
+            <Button
+                android:id="@+id/btn_format_edit_text"
+                style="@style/orange_btn_style"
+                android:text="格式化手机/银行卡的EditText"/>
+            <Button
+                android:id="@+id/btn_circle_progress"
+                style="@style/orange_btn_style"
+                android:text="环形进度条"/>
+            <Button
+                android:id="@+id/btn_fast_dialog"
+                style="@style/orange_btn_style"
+                android:text="自定义的dialog"/>
+            <Button
+                android:id="@+id/btn_progress_wheel"
+                style="@style/orange_btn_style"
+                android:text="环形进度"/>
+            <Button
+                android:id="@+id/btn_square_image"
+                style="@style/orange_btn_style"
+                android:text="圆形的头像image"/>
+            <Button
+                android:id="@+id/btn_zoom_seek_bar"
+                style="@style/orange_btn_style"
+                android:text="文字跟随拖动并变大的SeekBar"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

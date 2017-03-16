@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xtec.timeline.R;
-import com.xtec.timeline.ui.activity.TestActivity;
+import com.xtec.timeline.ui.activity.WidgetDemoActivity;
 import com.xtec.timeline.utils.UIUtils;
 
 import butterknife.BindView;
@@ -54,6 +54,6 @@ public class MessageFragment extends Fragment {
     @OnClick(R.id.tv_message)
     public void onClick() {
 
-        startActivity(new Intent(getActivity(), TestActivity.class));
+        startActivity(new Intent(getActivity(), WidgetDemoActivity.class));
     }
 }

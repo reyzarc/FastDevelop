@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <!--<item name="toolbarStyle">@style/MyToolbarStyle</item>-->
         <item name="alertDialogStyle">@style/FastDialogStyle</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -114,6 +114,7 @@
         <item name="android:layout_alignParentBottom">true</item>
     </style>
 
+    <!--activity切换动画-->
     <style name="ActivitySwitchStyle">
         <item name="android:activityOpenEnterAnimation">@anim/right_in</item>
         <item name="android:activityOpenExitAnimation">@anim/anim_stay</item>
@@ -121,5 +122,16 @@
         <item name="android:activityCloseExitAnimation">@anim/right_out</item>
     </style>
 
+    <!--btn样式-->
+    <style name="orange_btn_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/orange_btn_bg</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 
 </resources>

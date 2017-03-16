@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/topbar"
+        layout="@layout/layout_top_bar"/>
+
+    <EditText
+        android:id="@+id/et_num_pwd"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/topbar"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_light"
+        android:hint="请输入密码"/>
+
+    <com.xtec.timeline.widget.pwdkeyboard.VirtualKeyboardView
+        android:id="@+id/num_keyboard"
+        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_below="@id/et_num_pwd"
+        android:id="@+id/btn"
+        style="@style/orange_btn_style"
+        android:text="确定"/>
+
+</RelativeLayout>

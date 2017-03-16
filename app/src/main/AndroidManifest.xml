@@ -38,6 +38,14 @@
             android:name=".ui.activity.ReverseActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".ui.activity.WidgetDemoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.activity.NumKeyboardActivity"
+            android:screenOrientation="portrait"/>
+
         <service android:name=".service.UpdateService"/>
     </application>
 
