@@ -17,33 +17,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="@string/app_name"/>
+                android:text="@string/app_name"
+                android:textColor="@color/black"/>
+
             <TextView
+                android:id="@+id/download_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/download_percent"
-                android:textColor="@color/black"
+                android:layout_alignParentRight="true"
                 android:text="0%"
-                android:layout_alignParentRight="true"/>
+                android:textColor="@color/black"/>
 
         </RelativeLayout>
 
         <ProgressBar
+            android:layout_marginTop="10dp"
             android:id="@+id/download_progressbar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_height="6dp"
+            android:progressDrawable="@drawable/progress_bar_bg"/>
     </LinearLayout>
 
 </LinearLayout>

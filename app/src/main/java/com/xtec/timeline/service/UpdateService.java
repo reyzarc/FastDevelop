@@ -6,11 +6,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.widget.RemoteViews;
 
 import com.xtec.timeline.R;
@@ -27,7 +29,7 @@ import java.net.URL;
  * Created by 武昌丶鱼 on 2016/11/1.
  * Description:app更新服务
  */
-public class UpdateService extends Service{
+public class UpdateService extends Service {
     private static final String TAG = "UpdateService";
 
     @Nullable
@@ -35,6 +37,7 @@ public class UpdateService extends Service{
     public IBinder onBind(Intent intent) {
         return null;
     }
+
     private Notification notification;
     private NotificationManager nm;
     private File tempFile = null;
@@ -51,9 +54,9 @@ public class UpdateService extends Service{
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case DOWNLOAD_RUNNING://下载中
-                    downloadPercent = (int) msg.obj>100?100:(int)msg.obj;
+                    downloadPercent = (int) msg.obj > 100 ? 100 : (int) msg.obj;
                     contentView.setProgressBar(R.id.download_progressbar, 100, downloadPercent, false);
-                    contentView.setTextViewText(R.id.download_percent,downloadPercent+"%");
+                    contentView.setTextViewText(R.id.download_percent, downloadPercent + "%");
                     notification.contentView = contentView;
                     nm.notify(0, notification);
                     break;
@@ -61,20 +64,25 @@ public class UpdateService extends Service{
                     downloadPercent = 0;
 //                    nm.cancel(0);
                     contentView.setProgressBar(R.id.download_progressbar, 100, 100, false);
-                    contentView.setTextViewText(R.id.download_percent,"下载完成,点击安装");
+                    contentView.setTextViewText(R.id.download_percent, "下载完成,点击安装");
                     notification.contentView = contentView;
                     notification.flags = Notification.FLAG_AUTO_CANCEL;
 
                     Intent intent = new Intent();
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.setAction(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile((File) msg.obj), "application/vnd.android.package-archive");
-
+                    if (Build.VERSION.SDK_INT >= 24) {
+                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        Uri contentUri = FileProvider.getUriForFile(UpdateService.this, "com.xtec.timeline.fileprovider", (File) msg.obj);
+                        intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+                    } else {
+                        intent.setDataAndType(Uri.fromFile((File) msg.obj), "application/vnd.android.package-archive");
+                    }
                     PendingIntent contentIntent = PendingIntent.getActivity(UpdateService.this, 0, intent, 0);
                     notification.contentIntent = contentIntent;
 
                     nm.notify(0, notification);
-                    T.showShort(UpdateService.this,"下载完成，点击安装");
+                    T.showShort(UpdateService.this, "下载完成，点击安装");
                     installApk((File) msg.obj);
                     //结束更新的服务
                     stopSelf();
@@ -84,7 +92,7 @@ public class UpdateService extends Service{
                     stopSelf();
                     break;
                 case DOWNLOAD_FAILED://下载失败
-                    T.showShort(UpdateService.this,"下载失败，请稍后重试！");
+                    T.showShort(UpdateService.this, "下载失败，请稍后重试！");
                     nm.cancel(0);
                     stopSelf();
                     break;
@@ -157,7 +165,11 @@ public class UpdateService extends Service{
                     conn.setConnectTimeout(5000);
                     long length = conn.getContentLength();
                     InputStream is = conn.getInputStream();
-                    File file = new File(Environment.getExternalStorageDirectory(),
+                    File destFolder = new File(Environment.getExternalStorageDirectory(), "/timeline");
+                    if (!destFolder.exists()) {
+                        destFolder.mkdirs();
+                    }
+                    File file = new File(destFolder,
                             R.string.app_name + ".apk");
                     //判断文件是否存在，存在则先删除
                     if (file.exists()) {
@@ -176,7 +188,7 @@ public class UpdateService extends Service{
                     while ((len = bis.read(bytes)) != -1) {
                         fos.write(bytes, 0, len);
                         total += len;
-                        percent = (int) ((total * 100)/ length) ;
+                        percent = (int) ((total * 100) / length);
                         if (percent - downloadPercent >= 1) {//每1%更新进度
                             downloadPercent = percent;
                             Message msg = handler.obtainMessage(DOWNLOAD_RUNNING, downloadPercent);
@@ -207,7 +219,14 @@ public class UpdateService extends Service{
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        //高版本android更新
+        if (Build.VERSION.SDK_INT >= 24) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(UpdateService.this, "com.xtec.timeline.fileprovider", file);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        }
         startActivity(intent);
     }
 
