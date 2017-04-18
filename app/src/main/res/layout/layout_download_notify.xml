@@ -42,7 +42,7 @@
         </RelativeLayout>
 
         <ProgressBar
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:id="@+id/download_progressbar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
