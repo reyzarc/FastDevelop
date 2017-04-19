@@ -67,6 +67,7 @@ public class WidgetDemoActivity extends BaseActivity {
 
                 break;
             case R.id.btn_circle_progress://环形进度条
+                startActivity(new Intent(this,TopbarTestActivity.class));
                 break;
             case R.id.btn_fast_dialog://自定义的dialog
                 break;

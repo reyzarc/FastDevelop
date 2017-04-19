@@ -67,6 +67,10 @@
             android:screenOrientation="portrait"/>
 
         <service android:name=".service.UpdateService"/>
+
+        <activity
+            android:name=".ui.activity.TopbarTestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

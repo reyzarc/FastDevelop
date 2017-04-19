@@ -88,6 +88,18 @@ public class UIUtils {
         return (int) (dipValue * scale + 0.5f);
     }
 
+    /**
+     * 初始化activity的topbar
+     * @param context
+     * @param topbar
+     */
+    public static void initTopbarForActivity(final Context context, View topbar) {
+        ViewGroup.LayoutParams params = topbar.getLayoutParams();
+        params.height = getStatusBarHeight(context)+dip2px(context,50);
+        topbar.setLayoutParams(params);
+        topbar.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+    }
+
 
     /**
      * 初始化activity的topbar

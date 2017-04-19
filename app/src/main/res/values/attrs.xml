@@ -68,6 +68,17 @@
         <attr name="cpb_progressbar_width" format="dimension" />
         <attr name="cpb_background_progressbar_width" format="dimension" />
     </declare-styleable>
+    
+    <declare-styleable name="Topbar">
+        <attr name="topbar_height" format="dimension"/>
+        <attr name="topbar_color" format="color"/>
+        <attr name="back_enable" format="boolean"/>
+        <attr name="left_icon" format="reference"/>
+        <attr name="right_icon" format="reference"/>
+        <attr name="topbar_transparent" format="boolean"/>
+        <attr name="left_text" format="string"/>
+        <attr name="right_text" format="string"/>
+    </declare-styleable>
 
 
     <attr name="SwipeBackLayoutStyle" format="reference"/>
