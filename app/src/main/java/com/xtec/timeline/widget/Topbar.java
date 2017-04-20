@@ -126,6 +126,12 @@ public class Topbar extends LinearLayout {
         addView(mView, lp);
     }
 
+    /**
+     * 左边纯图片
+     *
+     * @param icon
+     * @param listener
+     */
     public void setLeftIcon(Drawable icon, OnClickListener listener) {
         if (leftButton != null) {
             leftButton.setImageDrawable(icon);
@@ -135,6 +141,12 @@ public class Topbar extends LinearLayout {
         }
     }
 
+    /**
+     * 右边纯图片
+     *
+     * @param icon
+     * @param listener
+     */
     public void setRightIcon(Drawable icon, OnClickListener listener) {
         if (leftButton != null) {
             rightButton.setImageDrawable(icon);
@@ -144,6 +156,12 @@ public class Topbar extends LinearLayout {
         }
     }
 
+    /**
+     * 左边纯文字
+     *
+     * @param leftText
+     * @param listener
+     */
     public void setLeftText(String leftText, OnClickListener listener) {
         if (!TextUtils.isEmpty(leftText)) {
             leftButton.setVisibility(GONE);
@@ -153,20 +171,64 @@ public class Topbar extends LinearLayout {
         }
     }
 
+    /**
+     * 设置右边带图片的文字
+     *
+     * @param leftText
+     * @param drawable
+     * @param listener
+     */
+    public void setLeftText(String leftText, Drawable drawable, OnClickListener listener) {
+        if (!TextUtils.isEmpty(leftText)) {
+            leftButton.setVisibility(GONE);
+            leftTextView.setVisibility(VISIBLE);
+            leftTextView.setText(leftText);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            leftTextView.setCompoundDrawables(drawable, null, null, null);
+            leftTextView.setCompoundDrawablePadding(10);
+            leftTextView.setOnClickListener(listener);
+        }
+    }
+
+    /**
+     * 右边纯文字
+     *
+     * @param rightText
+     * @param listener
+     */
     public void setRightText(String rightText, OnClickListener listener) {
-        if (TextUtils.isEmpty(rightText)) {
+        if (!TextUtils.isEmpty(rightText)) {
             rightButton.setVisibility(GONE);
             rightTextView.setVisibility(VISIBLE);
             rightTextView.setText(rightText);
             rightTextView.setOnClickListener(listener);
         }
     }
-    public  interface OnTopbarClickListener {
-        void onLeftBarClick();
 
-        void onRightBarClick();
+    /**
+     * 设置右边带图片的文字
+     *
+     * @param rightText
+     * @param drawable
+     * @param listener
+     */
+    public void setRightText(String rightText, Drawable drawable, OnClickListener listener) {
+        if (!TextUtils.isEmpty(rightText)) {
+            rightButton.setVisibility(GONE);
+            rightTextView.setVisibility(VISIBLE);
+            rightTextView.setText(rightText);
+            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+            rightTextView.setCompoundDrawables(null, null, drawable, null);
+            rightTextView.setCompoundDrawablePadding(10);
+            rightTextView.setOnClickListener(listener);
+        }
     }
 
+    /**
+     * 右边bar点击事件
+     *
+     * @param listener
+     */
     public void setRightBarClickListener(OnClickListener listener) {
         if (rightTextView.getVisibility() == View.VISIBLE) {
             rightTextView.setOnClickListener(listener);
@@ -175,11 +237,30 @@ public class Topbar extends LinearLayout {
         }
     }
 
+    /**
+     * 左边bar点击事件
+     *
+     * @param listener
+     */
     public void setLeftBarClickListener(OnClickListener listener) {
         if (leftTextView.getVisibility() == View.VISIBLE) {
             leftTextView.setOnClickListener(listener);
         } else if (leftButton.getVisibility() == View.VISIBLE) {
             leftButton.setOnClickListener(listener);
         }
+    }
+
+    public TextView getRightTextView() {
+        if (rightTextView != null) {
+            return rightTextView;
+        }
+        return null;
+    }
+
+    public TextView getLeftTextView() {
+        if (leftTextView != null) {
+            return leftTextView;
+        }
+        return null;
     }
 }

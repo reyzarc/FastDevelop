@@ -41,10 +41,11 @@ public class TopbarTestActivity extends BaseActivity {
                 T.showShort(TopbarTestActivity.this,"点击了---->"+((TextView)view).getText());
             }
         });
-        topbar2.setRightBarClickListener(new View.OnClickListener() {
+
+        topbar2.setRightText("右边", getResources().getDrawable(R.drawable.ic_back_white), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                T.showShort(TopbarTestActivity.this,"点击了---->2的右边bar");
+                T.showShort(TopbarTestActivity.this,"点击了---->"+((TextView)view).getText());
             }
         });
     }
