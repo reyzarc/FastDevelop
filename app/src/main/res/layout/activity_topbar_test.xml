@@ -19,6 +19,14 @@
         app:back_enable="false"
         app:topbar_color="@color/colorPrimary"
         app:right_icon="@drawable/ic_launcher"/>
+    <com.xtec.timeline.widget.Topbar
+        android:id="@+id/topbar3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:back_enable="false"
+        app:topbar_transparent="true"
+        app:topbar_color="@color/colorPrimary"
+        app:right_icon="@drawable/ic_launcher"/>
 
     <TextView
         android:layout_width="match_parent"

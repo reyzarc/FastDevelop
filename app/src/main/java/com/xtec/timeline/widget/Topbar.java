@@ -73,10 +73,14 @@ public class Topbar extends LinearLayout {
         centerTextView = (TextView) mView.findViewById(R.id.topbar_title);
 
         //设置背景透明
-        if (mIsTransparent) {
+        if (mIsTransparent) {//背景透明,则默认将文字颜色设置为主题色
             mView.setBackgroundColor(0x00000000);
-        } else {
+            leftTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
+            rightTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
+        } else {//背景不透明,默认为白色
             mView.setBackgroundColor(mTopbarColor);
+            leftTextView.setTextColor(0x00ffffff);
+            rightTextView.setTextColor(0x00ffffff);
         }
 
         if (mLeftIcon == null) {
