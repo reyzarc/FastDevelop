@@ -3,6 +3,7 @@ package com.xtec.timeline.widget;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -79,8 +80,8 @@ public class Topbar extends LinearLayout {
             rightTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
         } else {//背景不透明,默认为白色
             mView.setBackgroundColor(mTopbarColor);
-            leftTextView.setTextColor(0x00ffffff);
-            rightTextView.setTextColor(0x00ffffff);
+            leftTextView.setTextColor(Color.parseColor("#FFFFFF"));
+            rightTextView.setTextColor(Color.parseColor("#FFFFFF"));
         }
 
         if (mLeftIcon == null) {

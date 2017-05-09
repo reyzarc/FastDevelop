@@ -43,6 +43,8 @@ public class WidgetDemoActivity extends BaseActivity {
     Button btnSquareImage;
     @BindView(R.id.btn_zoom_seek_bar)
     Button btnZoomSeekBar;
+    @BindView(R.id.btn_baidu_map)
+    Button btnBaiduMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,32 +52,36 @@ public class WidgetDemoActivity extends BaseActivity {
         setContentView(R.layout.activity_widget_demo);
         ButterKnife.bind(this);
         View topbar = findViewById(R.id.widget_demo_topbar);
-        initTopbar(this,topbar,true);
+        initTopbar(this, topbar, true);
     }
 
-    @OnClick({R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
+    @OnClick({R.id.btn_baidu_map,R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_num_keyboard://数字键盘
-                startActivity(new Intent(this,NumKeyboardActivity.class));
+                startActivity(new Intent(this, NumKeyboardActivity.class));
                 break;
             case R.id.btn_pwd_edit_text://仿微信支付密码输入框
-                startActivity(new Intent(this,PayPwdEditTextActivity.class));
+                startActivity(new Intent(this, PayPwdEditTextActivity.class));
                 break;
             case R.id.btn_format_edit_text://自动格式化电话/银行卡的editText
-                startActivity(new Intent(this,FormatEditTextActivity.class));
+                startActivity(new Intent(this, FormatEditTextActivity.class));
 
                 break;
             case R.id.btn_circle_progress://环形进度条
-                startActivity(new Intent(this,TopbarTestActivity.class));
+                startActivity(new Intent(this, TopbarTestActivity.class));
                 break;
             case R.id.btn_fast_dialog://自定义的dialog
+                startActivity(new Intent(this, ImageChooseActivity.class));
                 break;
             case R.id.btn_progress_wheel://环形进度
                 break;
             case R.id.btn_square_image://圆形头像
                 break;
             case R.id.btn_zoom_seek_bar://文字跟随拖动变大的seekBar
+                break;
+            case R.id.btn_baidu_map://百度地图
+                startActivity(new Intent(this,BaiduMapActivity.class));
                 break;
         }
     }

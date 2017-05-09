@@ -39,6 +39,7 @@
         style="@style/topbar_subtitle_style"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
+        android:singleLine="true"
         android:textColor="@color/white"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/topbar_padding"

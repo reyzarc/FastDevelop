@@ -1,6 +1,7 @@
 package com.xtec.timeline.common;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -78,14 +79,14 @@ public class UpdateManager {
     }
 
     private static void showPermissionDialog() {
+        final RxPermissions rxPermissions = new RxPermissions((Activity) mContext);
         new FastDialog(mContext)
                 .setTitle("提醒")
                 .setContent("版本升级需要权限才能正常使用。\n点击下一步配置权限\n点击取消将无法正常升级")
                 .setPositiveButton("下一步", new FastDialog.OnClickListener() {
                     @Override
                     public void onClick(FastDialog dialog) {
-                        RxPermissions.getInstance(mContext)
-                                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                                 .subscribe(new Action1<Boolean>() {
                                     @Override
                                     public void call(Boolean aBoolean) {

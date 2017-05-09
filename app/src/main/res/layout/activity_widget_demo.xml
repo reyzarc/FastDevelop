@@ -50,6 +50,11 @@
                 style="@style/orange_btn_style"
                 android:text="文字跟随拖动并变大的SeekBar"/>
 
+            <Button
+                android:id="@+id/btn_baidu_map"
+                style="@style/orange_btn_style"
+                android:text="百度地图"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

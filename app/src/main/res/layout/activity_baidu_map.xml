@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_enable_traffic"
+                style="@style/orange_btn_style"
+                android:layout_weight="1"
+                android:text="显示实时交通"/>
+            <Button
+                android:id="@+id/btn_test"
+                android:layout_weight="1"
+                style="@style/orange_btn_style"
+                android:text="再说"/>
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>

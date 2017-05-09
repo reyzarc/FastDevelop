@@ -1,13 +1,19 @@
 package com.xtec.timeline.utils;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -202,5 +208,64 @@ public class Utils {
     public static boolean hasPermission(Context context, String permission) {
         return ContextCompat.checkSelfPermission(context, permission) ==
                 PackageManager.PERMISSION_GRANTED;
+    }
+
+    //当前应用是否处于前台
+    public static boolean isForeground(Context context) {
+        if (context != null) {
+            ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+            ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
+            String currentPackageName = cn.getPackageName();
+            if (!TextUtils.isEmpty(currentPackageName) && currentPackageName.equals(context.getPackageName())) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * 跳转到应用权限设置页面
+     * @param context
+     * @param code
+     */
+    public static void startAppSetting(Context context, int code) {
+        Intent intent = new Intent();
+        if (isMIUI()) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction("miui.intent.action.APP_PERM_EDITOR");
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.putExtra("extra_pkgname", context.getPackageName());
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (Build.VERSION.SDK_INT >= 9) {
+                intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+            } else if (Build.VERSION.SDK_INT <= 8) {
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
+                intent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
+            }
+        }
+        ((Activity) context).startActivityForResult(intent, code);
+    }
+
+    private static final String KEY_MIUI_VERSION_CODE = "ro.miui.ui.version.code";
+    private static final String KEY_MIUI_VERSION_NAME = "ro.miui.ui.version.name";
+    private static final String KEY_MIUI_INTERNAL_STORAGE = "ro.miui.internal.storage";
+
+    /**
+     * 判断是小米系统
+     * @return
+     */
+    public static boolean isMIUI() {
+        try {
+            final BuildProperties prop = BuildProperties.newInstance();
+            return prop.getProperty(KEY_MIUI_VERSION_CODE, null) != null
+                    || prop.getProperty(KEY_MIUI_VERSION_NAME, null) != null
+                    || prop.getProperty(KEY_MIUI_INTERNAL_STORAGE, null) != null;
+        } catch (final IOException e) {
+            return false;
+        }
     }
 }

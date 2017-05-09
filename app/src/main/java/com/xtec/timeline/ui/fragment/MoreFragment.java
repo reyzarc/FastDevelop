@@ -1,5 +1,6 @@
 package com.xtec.timeline.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xtec.timeline.R;
-import com.xtec.timeline.common.UpdateManager;
+import com.xtec.timeline.ui.activity.WidgetDemoActivity;
 import com.xtec.timeline.utils.L;
 import com.xtec.timeline.utils.UIUtils;
 
@@ -69,7 +70,8 @@ public class MoreFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_more:
-                UpdateManager.checkNewVersion(getActivity(), false);
+//                UpdateManager.checkNewVersion(getActivity(), false);
+                startActivity(new Intent(getActivity(), WidgetDemoActivity.class));
                 drawerLayout.closeDrawer(Gravity.RIGHT);
                 break;
             case R.id.topbar_right:
