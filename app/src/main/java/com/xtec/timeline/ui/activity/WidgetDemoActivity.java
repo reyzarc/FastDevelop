@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.xtec.timeline.R;
+import com.xtec.timeline.utils.Utils;
+import com.xtec.timeline.widget.Topbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,12 +21,7 @@ import butterknife.OnClick;
 
 public class WidgetDemoActivity extends BaseActivity {
 
-    @BindView(R.id.topbar_left)
-    ImageButton topbarLeft;
-    @BindView(R.id.topbar_title)
-    TextView topbarTitle;
-    @BindView(R.id.topbar_right)
-    ImageButton topbarRight;
+
     @BindView(R.id.btn_num_keyboard)
     Button btnNumKeyboard;
     @BindView(R.id.btn_pwd_edit_text)
@@ -45,21 +40,24 @@ public class WidgetDemoActivity extends BaseActivity {
     Button btnZoomSeekBar;
     @BindView(R.id.btn_baidu_map)
     Button btnBaiduMap;
+    @BindView(R.id.topbar)
+    Topbar topbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_widget_demo);
         ButterKnife.bind(this);
-        View topbar = findViewById(R.id.widget_demo_topbar);
-        initTopbar(this, topbar, true);
+        initTopbar(this, topbar);
     }
 
-    @OnClick({R.id.btn_baidu_map,R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
+    @OnClick({R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_num_keyboard://数字键盘
-                startActivity(new Intent(this, NumKeyboardActivity.class));
+                if (!Utils.isFastDoubleClick()) {
+                    startActivity(new Intent(this, NumKeyboardActivity.class));
+                }
                 break;
             case R.id.btn_pwd_edit_text://仿微信支付密码输入框
                 startActivity(new Intent(this, PayPwdEditTextActivity.class));
@@ -81,7 +79,7 @@ public class WidgetDemoActivity extends BaseActivity {
             case R.id.btn_zoom_seek_bar://文字跟随拖动变大的seekBar
                 break;
             case R.id.btn_baidu_map://百度地图
-                startActivity(new Intent(this,BaiduMapActivity.class));
+                startActivity(new Intent(this, BaiduMapActivity.class));
                 break;
         }
     }

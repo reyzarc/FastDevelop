@@ -32,7 +32,7 @@ import java.util.Date;
  * Description:
  */
 
-public class ImageChooseActivity extends Activity {
+public class ImageChooseActivity extends BaseActivity {
 
     private static final int INPUT_FILE_REQUEST_CODE = 1;
     private static final int FILECHOOSER_RESULTCODE = 1;

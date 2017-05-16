@@ -33,7 +33,6 @@ public class TopbarTestActivity extends BaseActivity {
     TextView tvAfterBubble;
 
     private int[] arr = {11, 2, 5, 9, 4, 22, 6, 10};
-    private int[] result = new int[arr.length];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,26 +40,42 @@ public class TopbarTestActivity extends BaseActivity {
         setContentView(R.layout.activity_topbar_test);
         ButterKnife.bind(this);
         initTopbar(this, topbar);
+        //在代码中设置纯图片的topbar
         topbar.setRightIcon(getResources().getDrawable(R.drawable.ic_launcher), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 T.showShort(TopbarTestActivity.this, "点击了---->right");
             }
         });
-
+        //在代码中设置纯文字的topbar
         topbar2.setLeftText("测试", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 T.showShort(TopbarTestActivity.this, "点击了---->" + ((TextView) view).getText());
             }
         });
-
+        //在代码中设置带图片的文字
         topbar2.setRightText("右边", getResources().getDrawable(R.drawable.ic_back_white), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 T.showShort(TopbarTestActivity.this, "点击了---->" + ((TextView) view).getText());
             }
         });
+        //在xml中设置的topbar的图片,则需要手动设置点击事件
+        topbar3.setRightBarClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                T.showShort(TopbarTestActivity.this,"点击我啊 ----->");
+            }
+        });
+        topbar3.setLeftIcon(getResources().getDrawable(R.drawable.ic_launcher), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                T.showShort(TopbarTestActivity.this,"就点你了 ----->");
+            }
+        });
+        topbar3.setTitle("代码标题与颜色");
+        topbar3.setTitleColor(getResources().getColor(R.color.green));
 
         tvBefore.setText("原始数据是:" + Arrays.toString(arr));
         doSort(arr);

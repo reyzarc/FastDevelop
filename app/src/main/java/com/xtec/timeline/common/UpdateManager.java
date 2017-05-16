@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
 import com.xtec.timeline.service.UpdateService;
@@ -42,6 +43,7 @@ public class UpdateManager {
         if (remoteVersion > localVersion) {//有新版本
             //弹出更新对话框
             //这里要先判断更新服务是否已经启动，如果已经在后台启动，则不要弹窗提示，否则会存在问题
+            Log.e("reyzarc","服务是否在运行----->"+Utils.isServiceRunning(UpdateService.class,mContext));
             if (!Utils.isServiceRunning(UpdateService.class,mContext)) {
                 showUpdateDialog(mUpdateUrl, feature);
             }

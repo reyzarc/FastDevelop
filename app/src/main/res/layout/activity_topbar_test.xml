@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:back_enable="true"
+        app:title="xml仅标题"
         app:topbar_color="@color/black"/>
 
     <com.xtec.timeline.widget.Topbar
@@ -17,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:back_enable="false"
+        app:title="xml标题与颜色"
+        app:title_color="@color/black"
         app:topbar_color="@color/colorPrimary"
         app:right_icon="@drawable/ic_launcher"/>
     <com.xtec.timeline.widget.Topbar

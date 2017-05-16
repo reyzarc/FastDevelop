@@ -22,19 +22,51 @@ import com.xtec.timeline.R;
  */
 
 public class Topbar extends LinearLayout {
+    /**
+     * topbar高度
+     */
     private int mTopbarHeight;
+    /**
+     * 是否透明状态栏
+     */
     private boolean mIsTransparent;
+    /**
+     * 是否激活返回按键
+     */
     private boolean mEnableBack;
+    /**
+     * 左边图标
+     */
     private Drawable mLeftIcon;
+    /**
+     * 右边图标
+     */
     private Drawable mRightIcon;
+    /**
+     * 左边文字
+     */
     private String mLeftText;
+    /**
+     * 右边文字
+     */
     private String mRightText;
+    /**
+     * 标题
+     */
+    private String mTitleText;
+    /**
+     * topbar的背景色
+     */
     private int mTopbarColor;
+    /**
+     * 标题文字颜色,默认白色
+     */
+    private int mTitleColor;
 
     private LayoutInflater mLayoutInflater;
     private View mView;
 
-    private TextView leftTextView, rightTextView, centerTextView;
+    private TextView leftTextView, rightTextView, titleTextView;
     private ImageButton leftButton, rightButton;
 
 
@@ -61,6 +93,8 @@ public class Topbar extends LinearLayout {
         mRightIcon = ta.getDrawable(R.styleable.Topbar_right_icon);
         mLeftText = ta.getString(R.styleable.Topbar_left_text);
         mRightText = ta.getString(R.styleable.Topbar_right_text);
+        mTitleText = ta.getString(R.styleable.Topbar_title);
+        mTitleColor = ta.getColor(R.styleable.Topbar_title_color, Color.parseColor("#FFFFFF"));
 
         ta.recycle();
 
@@ -71,7 +105,13 @@ public class Topbar extends LinearLayout {
         rightButton = (ImageButton) mView.findViewById(R.id.topbar_right_icon);
         leftTextView = (TextView) mView.findViewById(R.id.topbar_left_title);
         rightTextView = (TextView) mView.findViewById(R.id.topbar_right_title);
-        centerTextView = (TextView) mView.findViewById(R.id.topbar_title);
+        titleTextView = (TextView) mView.findViewById(R.id.topbar_title);
+
+        //设置标题
+        if(!TextUtils.isEmpty(mTitleText)){
+            titleTextView.setText(mTitleText);
+            titleTextView.setTextColor(mTitleColor);
+        }
 
         //设置背景透明
         if (mIsTransparent) {//背景透明,则默认将文字颜色设置为主题色
@@ -129,6 +169,38 @@ public class Topbar extends LinearLayout {
 
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addView(mView, lp);
+    }
+
+    /**
+     * 设置标题
+     * @param title
+     */
+    public void setTitle(String title){
+        if(!TextUtils.isEmpty(title)){
+            titleTextView.setText(title);
+        }
+    }
+
+    /**
+     * 设置标题,带颜色
+     * @param title
+     * @param color
+     */
+    public void setTitle(String title,int color){
+        if(!TextUtils.isEmpty(title)){
+            titleTextView.setText(title);
+            titleTextView.setTextColor(color);
+        }
+    }
+
+    /**
+     * 设置标题颜色
+     * @param color
+     */
+    public void setTitleColor(int color){
+        if(!TextUtils.isEmpty(titleTextView.getText().toString())){
+            titleTextView.setTextColor(color);
+        }
     }
 
     /**
