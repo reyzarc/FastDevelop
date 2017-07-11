@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.xtec.timeline.R;
 import com.xtec.timeline.ui.activity.WidgetDemoActivity;
 import com.xtec.timeline.utils.UIUtils;
+import com.xtec.timeline.widget.Topbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +33,8 @@ public class MessageFragment extends Fragment {
     ImageButton topbarRight;
     @BindView(R.id.tv_message)
     TextView tvMessage;
+    @BindView(R.id.topbar)
+    Topbar topbar;
     private View view;
 
     @Nullable
@@ -41,13 +44,14 @@ public class MessageFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_message, null);
 
 
-        View topBar = view.findViewById(R.id.message_topbar);
-        UIUtils.initTopbar(getActivity(), topBar, false);
-
-        ((TextView)topBar.findViewById(R.id.topbar_title)).setText("消息");
+//        View topBar = view.findViewById(R.id.message_topbar);
+//        UIUtils.initTopbar(getActivity(), topBar, false);
+//
+//        ((TextView)topBar.findViewById(R.id.topbar_title)).setText("消息");
 
 
         ButterKnife.bind(this, view);
+        UIUtils.initTopbar(getActivity(),topbar,false);
         return view;
     }
 
@@ -55,5 +59,10 @@ public class MessageFragment extends Fragment {
     public void onClick() {
 
         startActivity(new Intent(getActivity(), WidgetDemoActivity.class));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }

@@ -63,6 +63,7 @@
         <item name="android:singleLine">false</item>
     </style>
 
+
     <!--滑动返回样式-->
     <style name="SwipeBackLayout">
         <item name="edge_size">50dip</item>
@@ -70,7 +71,6 @@
         <item name="shadow_right">@drawable/shadow_right</item>
         <item name="shadow_bottom">@drawable/shadow_bottom</item>
     </style>
-
     <!--toolbar样式-->
     <style name="toolbar_style">
         <item name="android:layout_width">match_parent</item>

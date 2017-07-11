@@ -73,6 +73,7 @@ public class WidgetDemoActivity extends BaseActivity {
                 startActivity(new Intent(this, ImageChooseActivity.class));
                 break;
             case R.id.btn_progress_wheel://环形进度
+                startActivity(new Intent(this,FloatViewActivity.class));
                 break;
             case R.id.btn_square_image://圆形头像
                 break;
