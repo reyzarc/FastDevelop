@@ -81,10 +81,6 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.activity.WidgetDemoActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
             android:name=".ui.activity.NumKeyboardActivity"
             android:screenOrientation="portrait"/>
 
@@ -112,6 +108,12 @@
 
         <activity
             android:name=".ui.activity.TimePlanActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.WidgetDemoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.CalendarActivity"
             android:screenOrientation="portrait"/>
 
         <activity

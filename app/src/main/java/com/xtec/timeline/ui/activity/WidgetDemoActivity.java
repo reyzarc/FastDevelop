@@ -76,6 +76,7 @@ public class WidgetDemoActivity extends BaseActivity {
                 startActivity(new Intent(this,FloatViewActivity.class));
                 break;
             case R.id.btn_square_image://圆形头像
+                startActivity(new Intent(this,CalendarActivity.class));
                 break;
             case R.id.btn_zoom_seek_bar://文字跟随拖动变大的seekBar
                 break;
