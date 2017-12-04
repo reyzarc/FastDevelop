@@ -41,12 +41,12 @@ public class TopbarTestActivity extends BaseActivity {
         ButterKnife.bind(this);
         initTopbar(this, topbar);
         //在代码中设置纯图片的topbar
-        topbar.setRightIcon(getResources().getDrawable(R.drawable.ic_launcher), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                T.showShort(TopbarTestActivity.this, "点击了---->right");
-            }
-        });
+//        topbar.setRightIcon(getResources().getDrawable(R.drawable.ic_launcher), new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                T.showShort(TopbarTestActivity.this, "点击了---->right");
+//            }
+//        });
         //在代码中设置纯文字的topbar
         topbar2.setLeftText("测试", new View.OnClickListener() {
             @Override

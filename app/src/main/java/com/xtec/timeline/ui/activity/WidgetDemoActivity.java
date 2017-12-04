@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.xtec.timeline.R;
+import com.xtec.timeline.utils.MathUtils;
 import com.xtec.timeline.utils.Utils;
 import com.xtec.timeline.widget.Topbar;
 
@@ -76,9 +77,11 @@ public class WidgetDemoActivity extends BaseActivity {
                 startActivity(new Intent(this,FloatViewActivity.class));
                 break;
             case R.id.btn_square_image://圆形头像
-                startActivity(new Intent(this,CalendarActivity.class));
+                startActivity(new Intent(this,SampleActivity.class));
                 break;
             case R.id.btn_zoom_seek_bar://文字跟随拖动变大的seekBar
+                MathUtils.calculateInterest(174000,0.12f,18);
+                MathUtils.calculateInterest2(891.6f,0.16f);
                 break;
             case R.id.btn_baidu_map://百度地图
                 startActivity(new Intent(this, BaiduMapActivity.class));

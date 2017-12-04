@@ -2,6 +2,7 @@ package com.xtec.timeline.ui.activity;
 
 import android.os.Bundle;
 
+import com.john.waveview.WaveView;
 import com.xtec.timeline.R;
 import com.xtec.timeline.widget.Topbar;
 
@@ -18,12 +19,14 @@ public class CalendarActivity extends BaseActivity {
 
     @BindView(R.id.topbar)
     Topbar topbar;
+    @BindView(R.id.wave_view)
+    WaveView waveView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);
-        initTopbar(this,topbar);
+        initTopbar(this, topbar);
     }
 }

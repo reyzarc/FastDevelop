@@ -9,8 +9,10 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:back_enable="true"
+        app:back_enable="false"
         app:title="xml仅标题"
+        app:left_text="怎么会这"
+        app:right_text="这是"
         app:topbar_color="@color/black"/>
 
     <com.xtec.timeline.widget.Topbar
