@@ -1,6 +1,6 @@
 package com.xtec.timeline.widget;
 
-import android.animation.ValueAnimator;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

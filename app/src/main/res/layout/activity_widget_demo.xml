@@ -76,6 +76,11 @@
                 style="@style/orange_btn_style"
                 android:text="带数字progressbar"/>
 
+            <Button
+                android:id="@+id/btn_light_control"
+                style="@style/orange_btn_style"
+                android:text="仿ios亮度调节"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

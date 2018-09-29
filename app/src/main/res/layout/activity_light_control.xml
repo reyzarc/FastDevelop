@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.xtec.timeline.widget.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:back_enable="true"
-        app:title="带数字进度条"
-        app:topbar_color="@color/red"/>
+        app:title="IOS亮度调节"
+        app:topbar_color="@color/yellow"/>
 
-    <com.xtec.timeline.widget.NumberProgressBar
-        android:id="@+id/num_progress_bar"
-        android:layout_marginTop="200dp"
-        android:layout_height="60dp"
-        android:layout_width="400dp"
-        android:layout_gravity="center"/>
-
+    <com.xtec.timeline.widget.LightControlView
+        android:layout_height="match_parent"
+        android:layout_width="100dp"
+        android:layout_gravity="center"
+        />
 
 </LinearLayout>
