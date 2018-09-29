@@ -43,6 +43,8 @@ public class WidgetDemoActivity extends BaseActivity {
     Button btnBaiduMap;
     @BindView(R.id.topbar)
     Topbar topbar;
+    @BindView(R.id.btn_progress_bar)
+    Button btnProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class WidgetDemoActivity extends BaseActivity {
         initTopbar(this, topbar);
     }
 
-    @OnClick({R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
+    @OnClick({R.id.btn_progress_bar,R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_num_keyboard://数字键盘
@@ -74,17 +76,20 @@ public class WidgetDemoActivity extends BaseActivity {
                 startActivity(new Intent(this, ImageChooseActivity.class));
                 break;
             case R.id.btn_progress_wheel://环形进度
-                startActivity(new Intent(this,FloatViewActivity.class));
+                startActivity(new Intent(this, FloatViewActivity.class));
                 break;
             case R.id.btn_square_image://圆形头像
-                startActivity(new Intent(this,SampleActivity.class));
+                startActivity(new Intent(this, SampleActivity.class));
                 break;
             case R.id.btn_zoom_seek_bar://文字跟随拖动变大的seekBar
-                MathUtils.calculateInterest(174000,0.12f,18);
-                MathUtils.calculateInterest2(891.6f,0.16f);
+                MathUtils.calculateInterest(174000, 0.12f, 18);
+                MathUtils.calculateInterest2(891.6f, 0.16f);
                 break;
             case R.id.btn_baidu_map://百度地图
                 startActivity(new Intent(this, BaiduMapActivity.class));
+                break;
+            case R.id.btn_progress_bar://带数字进度条
+                startActivity(new Intent(this, NumberProgressBarActivity.class));
                 break;
         }
     }

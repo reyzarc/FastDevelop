@@ -6,6 +6,22 @@ def releaseTime() {
 }
 
 android {
+
+    signingConfigs {
+        release {
+            keyAlias 'timeline'
+            keyPassword 'timeline'
+            storeFile file('timeline.jks')
+            storePassword 'timeline'
+        }
+
+        debug {
+            keyAlias 'timeline'
+            keyPassword 'timeline'
+            storeFile file('timeline.jks')
+            storePassword 'timeline'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {

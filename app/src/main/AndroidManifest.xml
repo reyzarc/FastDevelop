@@ -120,6 +120,10 @@
             android:screenOrientation="portrait"/>
 
         <activity
+            android:name=".ui.activity.NumberProgressBarActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.BaiduMapActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"

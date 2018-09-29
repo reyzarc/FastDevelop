@@ -1,5 +1,6 @@
 package com.xtec.timeline.ui.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class FootprintFragment extends Fragment {
 
     private Timer mTimer;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -124,6 +126,7 @@ public class FootprintFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler bannerHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -154,7 +157,7 @@ public class FootprintFragment extends Fragment {
         public Object instantiateItem(ViewGroup container, final int position) {
             ImageView iv = new ImageView(getActivity());
             iv.setImageResource(imgRes[position % imgRes.length]);
-            iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

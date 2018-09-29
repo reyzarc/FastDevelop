@@ -71,6 +71,11 @@
                 style="@style/orange_btn_style"
                 android:text="百度地图"/>
 
+            <Button
+                android:id="@+id/btn_progress_bar"
+                style="@style/orange_btn_style"
+                android:text="带数字progressbar"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
