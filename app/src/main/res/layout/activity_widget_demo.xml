@@ -81,6 +81,11 @@
                 style="@style/orange_btn_style"
                 android:text="仿ios亮度调节"/>
 
+            <Button
+                android:id="@+id/btn_animation_button"
+                style="@style/orange_btn_style"
+                android:text="带动画效果button"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

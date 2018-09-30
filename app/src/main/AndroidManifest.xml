@@ -71,6 +71,12 @@
             android:theme="@style/NoTranslucentTheme"/>
 
         <activity
+            android:name=".ui.activity.BaiduMapActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
+
+        <activity
             android:name=".ui.activity.BaseActivity"
             android:screenOrientation="portrait"/>
         <activity
@@ -128,10 +134,9 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.activity.BaiduMapActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:name=".ui.activity.AnimationButtonActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

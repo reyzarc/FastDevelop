@@ -47,6 +47,8 @@ public class WidgetDemoActivity extends BaseActivity {
     Button btnProgressBar;
     @BindView(R.id.btn_light_control)
     Button btnLightControl;
+    @BindView(R.id.btn_animation_button)
+    Button btnAnimationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class WidgetDemoActivity extends BaseActivity {
         initTopbar(this, topbar);
     }
 
-    @OnClick({R.id.btn_light_control,R.id.btn_progress_bar, R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
+    @OnClick({R.id.btn_animation_button, R.id.btn_light_control, R.id.btn_progress_bar, R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_num_keyboard://数字键盘
@@ -93,8 +95,11 @@ public class WidgetDemoActivity extends BaseActivity {
             case R.id.btn_progress_bar://带数字进度条
                 startActivity(new Intent(this, NumberProgressBarActivity.class));
                 break;
-            case R.id.btn_light_control://带数字进度条
+            case R.id.btn_light_control://IOS亮度调节
                 startActivity(new Intent(this, LightControlActivity.class));
+                break;
+            case R.id.btn_animation_button://动画效果Button
+                startActivity(new Intent(this, AnimationButtonActivity.class));
                 break;
         }
     }
