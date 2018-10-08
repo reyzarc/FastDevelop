@@ -86,6 +86,11 @@
                 style="@style/orange_btn_style"
                 android:text="带动画效果button"/>
 
+            <Button
+                android:id="@+id/btn_circle_wave"
+                style="@style/orange_btn_style"
+                android:text="圆形水波进度球"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

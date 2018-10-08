@@ -19,4 +19,6 @@
     <color name="orange_pressed">#f47e00</color>
     <color name="gray_light">#30000000</color>
     <color name="yellow">#fefcda02</color>
+    <color name="light_green">#fe6afc02</color>
+    <color name="dark_green">#fe01c16b</color>
 </resources>

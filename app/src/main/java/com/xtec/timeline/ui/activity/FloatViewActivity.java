@@ -3,7 +3,7 @@ package com.xtec.timeline.ui.activity;
 import android.os.Bundle;
 
 import com.xtec.timeline.R;
-import com.xtec.timeline.widget.CircleWaveView;
+import com.xtec.timeline.widget.CircleExpandView;
 import com.xtec.timeline.widget.FloatView;
 import com.xtec.timeline.widget.Topbar;
 
@@ -21,7 +21,7 @@ public class FloatViewActivity extends BaseActivity {
     @BindView(R.id.float_view)
     FloatView floatView;
     @BindView(R.id.float_view2)
-    CircleWaveView floatView2;
+    CircleExpandView floatView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

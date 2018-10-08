@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
 
-    <com.xtec.timeline.widget.CircleWaveView
+    <com.xtec.timeline.widget.CircleExpandView
         android:visibility="gone"
         android:id="@+id/float_view2"
         android:layout_height="140dp"

@@ -7,7 +7,10 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class CircleWaveView extends View implements Runnable {
+/**
+ * 向外扩散的View
+ */
+public class CircleExpandView extends View implements Runnable {
 	private float mWidth;
 	private float mHeight;
 	
@@ -24,15 +27,15 @@ public class CircleWaveView extends View implements Runnable {
 	private float bottomMargin = 0;//底部margin
 	private boolean fillCircle = true;//是否填充成实心圆环
 	
-	public CircleWaveView(Context context, AttributeSet attrs) {
+	public CircleExpandView(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
-	public CircleWaveView(Context context) {
+	public CircleExpandView(Context context) {
 		this(context, null, 0);
 	}
 	
-	public CircleWaveView(Context context, AttributeSet attrs, int defStyle) {
+	public CircleExpandView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		initView();
 	}
