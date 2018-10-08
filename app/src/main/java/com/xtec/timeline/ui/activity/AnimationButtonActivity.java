@@ -25,7 +25,12 @@ public class AnimationButtonActivity extends BaseActivity {
         animationButton.setOnButtonClickListener(new AnimationButton.OnButtonClickListener() {
             @Override
             public void onButtonClick() {
-                animationButton.doAnimator();
+                animationButton.startAnimator();
+            }
+
+            @Override
+            public void onAnimationFinish() {
+                animationButton.resetAnimator();
             }
         });
 

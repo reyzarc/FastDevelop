@@ -1,5 +1,7 @@
 package com.xtec.timeline.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -23,8 +25,6 @@ public class AnimationButton extends View {
 
     private int mRadius;
 
-    private int mChangedWidth = 0;
-
     private ValueAnimator mChangeRadiusAnimator;
 
     private ValueAnimator mRect2CircleAnimator;
@@ -34,6 +34,8 @@ public class AnimationButton extends View {
     private AnimatorSet mAnimatorSet;
 
     private OnButtonClickListener mButtonClickListener;
+
+    private int yDistance = 200;
 
 
     public AnimationButton(Context context) {
@@ -66,6 +68,15 @@ public class AnimationButton extends View {
         });
 
         initAnimation();
+
+        mAnimatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (mButtonClickListener != null) {
+                    mButtonClickListener.onAnimationFinish();
+                }
+            }
+        });
 
     }
 
@@ -119,23 +130,37 @@ public class AnimationButton extends View {
         });
     }
 
-    private void upTranslationAnimation(){
+    private void upTranslationAnimation() {
         float currTranslationY = this.getTranslationY();
-        mUpTranslationAnimator = ObjectAnimator.ofFloat(this,"translationY",currTranslationY,currTranslationY-200);
+        mUpTranslationAnimator = ObjectAnimator.ofFloat(this, "translationY", currTranslationY, currTranslationY - yDistance);
         mUpTranslationAnimator.setDuration(500);
         mUpTranslationAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
     public interface OnButtonClickListener {
         void onButtonClick();
+
+        void onAnimationFinish();
     }
 
     public void setOnButtonClickListener(OnButtonClickListener onButtonClickListener) {
         mButtonClickListener = onButtonClickListener;
     }
 
-    public void doAnimator() {
+    /**
+     * 开始动画
+     */
+    public void startAnimator() {
         mAnimatorSet.start();
     }
 
+    /**
+     * 重置动画到原始状态
+     */
+    public void resetAnimator() {
+        mRadius = 0;
+        mButtonWidth = 800;
+        setTranslationY(getTranslationY() + yDistance);
+        invalidate();
+    }
 }
