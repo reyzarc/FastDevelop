@@ -211,7 +211,7 @@ public class DynamicListView extends ListView {
     @Override
     public boolean onTouchEvent (MotionEvent event) {
         boolean shouldContinue = updateStateForTouch(event);
-        return shouldContinue ? super.onTouchEvent(event) : false;
+        return shouldContinue && super.onTouchEvent(event);
     }
 
     private boolean updateStateForTouch(MotionEvent event) {

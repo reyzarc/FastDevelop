@@ -122,7 +122,7 @@ public class ImageChooseActivity extends BaseActivity {
         webView = (WebView) findViewById(R.id.webView);
         webSettings = webView.getSettings();
         webSettings.setAppCacheEnabled(true);
-        webSettings.setCacheMode(webSettings.LOAD_CACHE_ELSE_NETWORK);
+        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setAllowFileAccess(true);

@@ -128,12 +128,8 @@ public class Utils {
     public static boolean isRunningForeground(Context context) {
         String packageName = getPackageName(context);
         String topActivityClassName = getTopActivityName(context);
-        if (packageName != null && topActivityClassName != null
-                && topActivityClassName.startsWith(packageName)) {
-            return true;
-        } else {
-            return false;
-        }
+        return packageName != null && topActivityClassName != null
+                && topActivityClassName.startsWith(packageName);
     }
 
     /**
@@ -216,10 +212,7 @@ public class Utils {
             ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
             String currentPackageName = cn.getPackageName();
-            if (!TextUtils.isEmpty(currentPackageName) && currentPackageName.equals(context.getPackageName())) {
-                return true;
-            }
-            return false;
+            return !TextUtils.isEmpty(currentPackageName) && currentPackageName.equals(context.getPackageName());
         }
         return false;
     }

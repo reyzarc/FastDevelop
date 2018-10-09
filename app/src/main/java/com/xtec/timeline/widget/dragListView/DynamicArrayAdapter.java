@@ -34,12 +34,12 @@ public abstract class DynamicArrayAdapter<T> extends ArrayAdapter<T> {
     private Integer backgroundColor = null;
 
     public interface ItemSwapListener {
-        public void onItemsSwapped(int pos1, int pos2);
+        void onItemsSwapped(int pos1, int pos2);
     }
 
     public interface RowHoverListener {
-        public void onHoverEventStarted(DynamicListView.HoverEvent event);
-        public void onHoverEventFinished(DynamicListView.HoverEvent event);
+        void onHoverEventStarted(DynamicListView.HoverEvent event);
+        void onHoverEventFinished(DynamicListView.HoverEvent event);
     }
 
     public DynamicArrayAdapter(Context context, int textViewResourceId, List<T> objects) {

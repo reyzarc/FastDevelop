@@ -1,5 +1,6 @@
 package com.xtec.timeline.service;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -22,6 +23,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -48,58 +50,121 @@ public class UpdateService extends Service {
     private static final int DOWNLOAD_FAILED = 2;
     private static final int DOWNLOAD_RUNNING = 3;
 
+    private MyHandler handler = new MyHandler(this);
 
-    private Handler handler = new Handler() {
+
+//    private Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            switch (msg.what) {
+//                case DOWNLOAD_RUNNING://下载中
+//                    downloadPercent = (int) msg.obj > 100 ? 100 : (int) msg.obj;
+//                    contentView.setProgressBar(R.id.download_progressbar, 100, downloadPercent, false);
+//                    contentView.setTextViewText(R.id.download_percent, downloadPercent + "%");
+//                    notification.contentView = contentView;
+//                    nm.notify(0, notification);
+//                    break;
+//                case DOWNLOAD_SUCCESS://下载成功
+//                    downloadPercent = 0;
+////                    nm.cancel(0);
+//                    contentView.setProgressBar(R.id.download_progressbar, 100, 100, false);
+//                    contentView.setTextViewText(R.id.download_percent, "下载完成,点击安装");
+//                    notification.contentView = contentView;
+//                    notification.flags = Notification.FLAG_AUTO_CANCEL;
+//
+//                    Intent intent = new Intent();
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent.setAction(Intent.ACTION_VIEW);
+//                    if (Build.VERSION.SDK_INT >= 24) {
+//                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                        Uri contentUri = FileProvider.getUriForFile(UpdateService.this, "com.xtec.timeline.fileprovider", (File) msg.obj);
+//                        intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+//                    } else {
+//                        intent.setDataAndType(Uri.fromFile((File) msg.obj), "application/vnd.android.package-archive");
+//                    }
+//                    PendingIntent contentIntent = PendingIntent.getActivity(UpdateService.this, 0, intent, 0);
+//                    notification.contentIntent = contentIntent;
+//
+//                    nm.notify(0, notification);
+//                    T.showShort(UpdateService.this, "下载完成，点击安装");
+//                    installApk((File) msg.obj);
+//                    //结束更新的服务
+//                    stopSelf();
+//                    break;
+//                case DOWNLOAD_CANCLE://下载取消
+//                    nm.cancel(0);
+//                    stopSelf();
+//                    break;
+//                case DOWNLOAD_FAILED://下载失败
+//                    T.showShort(UpdateService.this, "下载失败，请稍后重试！");
+//                    nm.cancel(0);
+//                    stopSelf();
+//                    break;
+//            }
+//            super.handleMessage(msg);
+//        }
+//    };
+
+    private static class MyHandler extends  Handler{
+
+        private WeakReference<UpdateService> reference;
+
+        public MyHandler(UpdateService service){
+            reference = new WeakReference<>(service);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case DOWNLOAD_RUNNING://下载中
-                    downloadPercent = (int) msg.obj > 100 ? 100 : (int) msg.obj;
-                    contentView.setProgressBar(R.id.download_progressbar, 100, downloadPercent, false);
-                    contentView.setTextViewText(R.id.download_percent, downloadPercent + "%");
-                    notification.contentView = contentView;
-                    nm.notify(0, notification);
-                    break;
-                case DOWNLOAD_SUCCESS://下载成功
-                    downloadPercent = 0;
+            UpdateService service = reference.get();
+            if(service!=null){
+                switch (msg.what) {
+                    case DOWNLOAD_RUNNING://下载中
+                        service.downloadPercent = (int) msg.obj > 100 ? 100 : (int) msg.obj;
+                        service.contentView.setProgressBar(R.id.download_progressbar, 100, service.downloadPercent, false);
+                        service.contentView.setTextViewText(R.id.download_percent, service.downloadPercent + "%");
+                        service.notification.contentView = service.contentView;
+                        service.nm.notify(0, service.notification);
+                        break;
+                    case DOWNLOAD_SUCCESS://下载成功
+                        service.downloadPercent = 0;
 //                    nm.cancel(0);
-                    contentView.setProgressBar(R.id.download_progressbar, 100, 100, false);
-                    contentView.setTextViewText(R.id.download_percent, "下载完成,点击安装");
-                    notification.contentView = contentView;
-                    notification.flags = Notification.FLAG_AUTO_CANCEL;
+                        service.contentView.setProgressBar(R.id.download_progressbar, 100, 100, false);
+                        service.contentView.setTextViewText(R.id.download_percent, "下载完成,点击安装");
+                        service.notification.contentView = service.contentView;
+                        service.notification.flags = Notification.FLAG_AUTO_CANCEL;
 
-                    Intent intent = new Intent();
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setAction(Intent.ACTION_VIEW);
-                    if (Build.VERSION.SDK_INT >= 24) {
-                        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        Uri contentUri = FileProvider.getUriForFile(UpdateService.this, "com.xtec.timeline.fileprovider", (File) msg.obj);
-                        intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-                    } else {
-                        intent.setDataAndType(Uri.fromFile((File) msg.obj), "application/vnd.android.package-archive");
-                    }
-                    PendingIntent contentIntent = PendingIntent.getActivity(UpdateService.this, 0, intent, 0);
-                    notification.contentIntent = contentIntent;
+                        Intent intent = new Intent();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setAction(Intent.ACTION_VIEW);
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            Uri contentUri = FileProvider.getUriForFile(service, "com.xtec.timeline.fileprovider", (File) msg.obj);
+                            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+                        } else {
+                            intent.setDataAndType(Uri.fromFile((File) msg.obj), "application/vnd.android.package-archive");
+                        }
+                        PendingIntent contentIntent = PendingIntent.getActivity(service, 0, intent, 0);
+                        service.notification.contentIntent = contentIntent;
 
-                    nm.notify(0, notification);
-                    T.showShort(UpdateService.this, "下载完成，点击安装");
-                    installApk((File) msg.obj);
-                    //结束更新的服务
-                    stopSelf();
-                    break;
-                case DOWNLOAD_CANCLE://下载取消
-                    nm.cancel(0);
-                    stopSelf();
-                    break;
-                case DOWNLOAD_FAILED://下载失败
-                    T.showShort(UpdateService.this, "下载失败，请稍后重试！");
-                    nm.cancel(0);
-                    stopSelf();
-                    break;
+                        service.nm.notify(0, service.notification);
+                        T.showShort(service, "下载完成，点击安装");
+                        service.installApk((File) msg.obj);
+                        //结束更新的服务
+                        service.stopSelf();
+                        break;
+                    case DOWNLOAD_CANCLE://下载取消
+                        service.nm.cancel(0);
+                        service.stopSelf();
+                        break;
+                    case DOWNLOAD_FAILED://下载失败
+                        T.showShort(service, "下载失败，请稍后重试！");
+                        service.nm.cancel(0);
+                        service.stopSelf();
+                        break;
+                }
             }
-            super.handleMessage(msg);
         }
-    };
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -232,7 +297,10 @@ public class UpdateService extends Service {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         stopSelf();
+        if(handler!=null){
+            handler.removeCallbacksAndMessages(null);
+        }
+        super.onDestroy();
     }
 }

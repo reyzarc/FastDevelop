@@ -22,7 +22,6 @@ import rx.functions.Action1;
  */
 public class UpdateManager {
     private static final String TAG = "UpdateManager";
-    private static Context mContext;
 
     // 所需的全部权限
     static final String[] PERMISSIONS = new String[]{
@@ -32,46 +31,45 @@ public class UpdateManager {
     private static String mUpdateUrl;
 
     public static void checkNewVersion(Context context,boolean isAutoCheck) {
-        mContext = context;
         //通过网络去获取服务器端的版本号,也可以通过versionName判断
 //        getVersionFromServer();
         int remoteVersion = 2;//版本号
         mUpdateUrl = "https://github.com/reyzarc/FastDevelopFrame/raw/master/app-debug.apk";//下载地址
         String feature = "1.这是第一个版本测试;\n2.有什么bug及时反馈;\n3.就算反馈了也不会修复的^_^";//更新描述
-        int localVersion = Utils.getVersionCode(mContext);
+        int localVersion = Utils.getVersionCode(context);
 
         if (remoteVersion > localVersion) {//有新版本
             //弹出更新对话框
             //这里要先判断更新服务是否已经启动，如果已经在后台启动，则不要弹窗提示，否则会存在问题
-            Log.e("reyzarc","服务是否在运行----->"+Utils.isServiceRunning(UpdateService.class,mContext));
-            if (!Utils.isServiceRunning(UpdateService.class,mContext)) {
-                showUpdateDialog(mUpdateUrl, feature);
+            Log.e("reyzarc","服务是否在运行----->"+Utils.isServiceRunning(UpdateService.class,context));
+            if (!Utils.isServiceRunning(UpdateService.class,context)) {
+                showUpdateDialog(context,mUpdateUrl, feature);
             }
         }else if(!isAutoCheck){
-            T.showShort(mContext,"当前已经是最新版!");
+            T.showShort(context,"当前已经是最新版!");
         }
     }
 
-    private static void showUpdateDialog(final String url, String feature) {
-        new FastDialog(mContext)
+    private static void showUpdateDialog(final Context context, final String url, String feature) {
+        new FastDialog(context)
                 .setTitle("检查到新版本")
                 .setContent(feature)
                 .setPositiveButton("立即更新", new FastDialog.OnClickListener() {
                     @Override
                     public void onClick(FastDialog dialog) {
                         //需要判断是否有读写权限
-                        if (Utils.hasPermissions(mContext, PERMISSIONS)) {//有权限
-                            startUpdateService();
-                            T.showShort(mContext, "即将更新...");
+                        if (Utils.hasPermissions(context, PERMISSIONS)) {//有权限
+                            startUpdateService(context);
+                            T.showShort(context, "即将更新...");
                         } else {//没有权限
-                            showPermissionDialog();
+                            showPermissionDialog(context);
                         }
                     }
                 })
                 .setNegativeButton("下次再说", new FastDialog.OnClickListener() {
                     @Override
                     public void onClick(FastDialog dialog) {
-                        T.showShort(mContext, "走好不送...");
+                        T.showShort(context, "走好不送...");
                     }
                 })
                 .setCancelable(false)
@@ -80,9 +78,9 @@ public class UpdateManager {
 
     }
 
-    private static void showPermissionDialog() {
-        final RxPermissions rxPermissions = new RxPermissions((Activity) mContext);
-        new FastDialog(mContext)
+    private static void showPermissionDialog(final Context context) {
+        final RxPermissions rxPermissions = new RxPermissions((Activity) context);
+        new FastDialog(context)
                 .setTitle("提醒")
                 .setContent("版本升级需要权限才能正常使用。\n点击下一步配置权限\n点击取消将无法正常升级")
                 .setPositiveButton("下一步", new FastDialog.OnClickListener() {
@@ -93,9 +91,9 @@ public class UpdateManager {
                                     @Override
                                     public void call(Boolean aBoolean) {
                                         if (!aBoolean) {//用户拒绝
-                                            showPmsGuideDialog();
+                                            showPmsGuideDialog(context);
                                         } else {//有权限
-                                            startUpdateService();
+                                            startUpdateService(context);
                                         }
                                     }
                                 });
@@ -110,14 +108,14 @@ public class UpdateManager {
 
     }
 
-    private static void showPmsGuideDialog() {
-        new FastDialog(mContext)
+    private static void showPmsGuideDialog(final Context context) {
+        new FastDialog(context)
                 .setTitle("提醒")
                 .setContent("权限缺失可能导致某些功能无法正常使用。\n请前往\"设置\"-\"权限管理\"-打开所需权限。")
                 .setPositiveButton("设置", new FastDialog.OnClickListener() {
                     @Override
                     public void onClick(FastDialog dialog) {
-                        startAppSetting();
+                        startAppSetting(context);
                     }
                 })
                 .setNegativeButton("退出", new FastDialog.OnClickListener() {
@@ -128,15 +126,15 @@ public class UpdateManager {
                 .create().show();
     }
 
-    private static void startAppSetting() {
+    private static void startAppSetting(Context context) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        intent.setData(Uri.parse("package:" + mContext.getPackageName()));
-        mContext.startActivity(intent);
+        intent.setData(Uri.parse("package:" + context.getPackageName()));
+        context.startActivity(intent);
     }
 
-    private static void startUpdateService() {
-        Intent intent = new Intent(mContext, UpdateService.class);
+    private static void startUpdateService(Context context) {
+        Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra("url", mUpdateUrl);
-        mContext.startService(intent);
+        context.startService(intent);
     }
 }
