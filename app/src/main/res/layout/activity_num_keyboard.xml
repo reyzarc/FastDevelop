@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <include
+    <com.xtec.timeline.widget.Topbar
         android:id="@+id/topbar"
-        layout="@layout/layout_top_bar"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:back_enable="true"
+        app:title="数字键盘"
+        app:topbar_color="@color/white"/>
 
     <EditText
         android:id="@+id/et_num_pwd"

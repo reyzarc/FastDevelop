@@ -2,6 +2,7 @@ package com.xtec.timeline.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -139,10 +140,12 @@ public class UIUtils {
         topbar.setBackgroundColor(context.getResources().getColor(color));
         if(color==R.color.white){//白色的状态栏,则将文字改为黑色
             StatusbarUtil.setFontBlack((Activity) context,true);
+            TextView tvTitle = (TextView) topbar.findViewById(R.id.topbar_title);
+            tvTitle.setTextColor(Color.BLACK);
         }
 
         if(isEnableBack){//有返回键
-            ImageButton btn  = (ImageButton) topbar.findViewById(R.id.topbar_left);
+            ImageButton btn  = (ImageButton) topbar.findViewById(R.id.topbar_left_icon);
             if(color==R.color.white){//白色的状态栏,则将文字改为黑色
                 btn.setImageResource(R.drawable.ic_back_black);
             }else{

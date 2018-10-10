@@ -119,7 +119,8 @@ public class StatusbarUtil {
         if(isXiaomi()){//对于小米手机6.0以上,应该优先调用小米的方法,而不是M上的,应该改ROM了
             setMiuiStatusBarDarkMode(activity,isDark);
         }else if(isMeizu()){
-            setMeizuStatusBarDarkIcon(activity,isDark);
+            StatusbarColorUtils.setStatusBarDarkIcon(activity,isDark);
+//            setMeizuStatusBarDarkIcon(activity,isDark);
         }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             setBlackFontUpM(activity,isDark);
         }else {
