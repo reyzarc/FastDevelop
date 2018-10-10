@@ -56,7 +56,7 @@ public class FootprintFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_footprint, null);
+        view = inflater.inflate(R.layout.fragment_footprint_as_taobao, null);
         ButterKnife.bind(this, view);
 
         final View topbar = view.findViewById(R.id.footprint_topbar);

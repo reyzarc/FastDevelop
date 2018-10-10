@@ -84,4 +84,9 @@
 
 
     <attr name="SwipeBackLayoutStyle" format="reference"/>
+
+    <declare-styleable name="ArcView">
+        <attr name="arc_height" format="dimension"/>
+        <attr name="background_color" format="color"/>
+    </declare-styleable>
 </resources>

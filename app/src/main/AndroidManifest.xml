@@ -32,6 +32,7 @@
         android:icon="@drawable/my_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:hardwareAccelerated="false"
         android:theme="@style/AppTheme">
 
         <meta-data
@@ -139,6 +140,10 @@
 
         <activity
             android:name=".ui.activity.CircleWaveActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.activity.ArcViewActivity"
             android:screenOrientation="portrait"/>
 
     </application>

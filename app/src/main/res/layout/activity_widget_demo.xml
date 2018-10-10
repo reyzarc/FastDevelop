@@ -91,6 +91,11 @@
                 style="@style/orange_btn_style"
                 android:text="圆形水波进度球"/>
 
+            <Button
+                android:id="@+id/btn_arc_view"
+                style="@style/orange_btn_style"
+                android:text="弧形view"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

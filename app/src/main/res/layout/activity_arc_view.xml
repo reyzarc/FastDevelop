@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.xtec.timeline.widget.Topbar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:back_enable="true"
+        app:title="带数字进度条"
+        app:topbar_color="@color/black"/>
+
+    <com.xtec.timeline.widget.ArcView
+        android:background="@color/gray_light"
+        android:id="@+id/arc_view"
+        android:layout_marginTop="200dp"
+        android:layout_height="20dp"
+        android:layout_width="match_parent"
+        app:background_color="@color/red"
+        android:layout_gravity="center"/>
+
+
+</LinearLayout>
