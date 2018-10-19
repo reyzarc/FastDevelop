@@ -5,9 +5,12 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include
+    <com.xtec.timeline.widget.Topbar
         android:id="@+id/topbar"
-        layout="@layout/layout_top_bar"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:back_enable="true"
+        app:title="输入框格式化"/>
 
     <com.xtec.timeline.widget.FormatEditText
         android:layout_width="match_parent"

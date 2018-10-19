@@ -10,6 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xtec.timeline.R;
+import com.xtec.timeline.utils.UIUtils;
+import com.xtec.timeline.widget.Topbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,11 +24,7 @@ import butterknife.OnClick;
 
 public class ReverseActivity extends AppCompatActivity {
 
-    @BindView(R.id.topbar_left)
-    ImageButton topbarLeft;
-    @BindView(R.id.topbar_title)
-    TextView topbarTitle;
-    @BindView(R.id.topbar_right)
+
     ImageButton topbarRight;
     @BindView(R.id.btn_start)
     Button btnStart;
@@ -34,15 +32,17 @@ public class ReverseActivity extends AppCompatActivity {
     Button btnStop;
     @BindView(R.id.tv)
     TextView tv;
+    @BindView(R.id.topbar)
+    Topbar topbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reverse);
         ButterKnife.bind(this);
+        UIUtils.initTopbarForActivity(this,topbar,true);
 
     }
-
 
 
     @OnClick({R.id.btn_start, R.id.btn_stop})

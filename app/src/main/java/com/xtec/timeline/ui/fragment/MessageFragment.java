@@ -25,11 +25,7 @@ import butterknife.OnClick;
  */
 public class MessageFragment extends Fragment {
     private static final String TAG = "MessageFragment";
-    @BindView(R.id.topbar_left)
-    ImageButton topbarLeft;
-    @BindView(R.id.topbar_title)
-    TextView topbarTitle;
-    @BindView(R.id.topbar_right)
+
     ImageButton topbarRight;
     @BindView(R.id.tv_message)
     TextView tvMessage;

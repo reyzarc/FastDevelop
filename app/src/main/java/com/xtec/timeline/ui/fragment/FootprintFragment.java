@@ -59,7 +59,7 @@ public class FootprintFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_footprint_as_taobao, null);
         ButterKnife.bind(this, view);
 
-        final View topbar = view.findViewById(R.id.footprint_topbar);
+        final View topbar = view.findViewById(R.id.topbar);
         UIUtils.initTopbar(getActivity(), topbar, true);
 //        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) topbar.getLayoutParams();
 //        params.setMargins(0,UIUtils.getStatusBarHeight(getActivity()),0,0);

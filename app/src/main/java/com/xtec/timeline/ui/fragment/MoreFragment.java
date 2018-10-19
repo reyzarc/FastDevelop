@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +17,7 @@ import com.xtec.timeline.R;
 import com.xtec.timeline.ui.activity.WidgetDemoActivity;
 import com.xtec.timeline.utils.L;
 import com.xtec.timeline.utils.UIUtils;
+import com.xtec.timeline.widget.Topbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,18 +31,16 @@ public class MoreFragment extends Fragment {
     private static final String TAG = "MoreFragment";
     @BindView(R.id.tv_more)
     TextView tvMore;
-    @BindView(R.id.topbar_left)
-    ImageButton topbarLeft;
-    @BindView(R.id.topbar_title)
-    TextView topbarTitle;
-    @BindView(R.id.topbar_right)
-    ImageButton topbarRight;
     @BindView(R.id.fl_content)
     FrameLayout flContent;
     @BindView(R.id.ll_drawer)
     LinearLayout llDrawer;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.topbar)
+    Topbar topbar;
+    @BindView(R.id.tv_copyright)
+    TextView tvCopyright;
     private View view;
 
 
@@ -52,35 +50,34 @@ public class MoreFragment extends Fragment {
         L.e("reyzarc", "more onCreateView is running...");
 
         view = inflater.inflate(R.layout.fragment_more, null);
-
-        View topBar = view.findViewById(R.id.more_topbar);
-        UIUtils.initTopbar(getActivity(), topBar, false);
-
-        ((TextView) topBar.findViewById(R.id.topbar_title)).setText("更多");
-
-        topBar.setBackgroundColor(getResources().getColor(R.color.blue));
-
         ButterKnife.bind(this, view);
 
-        topbarRight.setImageResource(R.drawable.ic_star);
+        UIUtils.initTopbar(getActivity(), topbar, false);
+
+
+        topbar.setRightIcon(getResources().getDrawable(R.drawable.ic_star), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawerLayout.isDrawerOpen(llDrawer)) {
+                    drawerLayout.closeDrawer(Gravity.RIGHT);
+                } else {
+                    drawerLayout.openDrawer(Gravity.RIGHT);
+                }
+            }
+        });
+
         return view;
     }
 
-    @OnClick({R.id.tv_more,R.id.topbar_right})
+    @OnClick({R.id.tv_more})
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_more:
 //                UpdateManager.checkNewVersion(getActivity(), false);
                 startActivity(new Intent(getActivity(), WidgetDemoActivity.class));
                 drawerLayout.closeDrawer(Gravity.RIGHT);
                 break;
-            case R.id.topbar_right:
-                if(drawerLayout.isDrawerOpen(llDrawer)){
-                    drawerLayout.closeDrawer(Gravity.RIGHT);
-                }else{
-                    drawerLayout.openDrawer(Gravity.RIGHT);
-                }
-                break;
+
         }
     }
 

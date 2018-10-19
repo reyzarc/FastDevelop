@@ -1,14 +1,11 @@
 package com.xtec.timeline.utils;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -112,18 +109,6 @@ public class UIUtils {
         ViewGroup.LayoutParams params = topbar.getLayoutParams();
         params.height = getStatusBarHeight(context)+dip2px(context,50);
         topbar.setLayoutParams(params);
-        topbar.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-
-        if(isEnableBack){//有返回键
-            ImageButton btn  = (ImageButton) topbar.findViewById(R.id.topbar_left);
-            btn.setImageResource(R.drawable.ic_back_white);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((Activity)context).finish();
-                }
-            });
-        }
     }
 
     /**
@@ -137,27 +122,7 @@ public class UIUtils {
         ViewGroup.LayoutParams params = topbar.getLayoutParams();
         params.height = getStatusBarHeight(context)+dip2px(context,50);
         topbar.setLayoutParams(params);
-        topbar.setBackgroundColor(context.getResources().getColor(color));
-        if(color==R.color.white){//白色的状态栏,则将文字改为黑色
-            StatusbarUtil.setFontBlack((Activity) context,true);
-            TextView tvTitle = (TextView) topbar.findViewById(R.id.topbar_title);
-            tvTitle.setTextColor(Color.BLACK);
-        }
 
-        if(isEnableBack){//有返回键
-            ImageButton btn  = (ImageButton) topbar.findViewById(R.id.topbar_left_icon);
-            if(color==R.color.white){//白色的状态栏,则将文字改为黑色
-                btn.setImageResource(R.drawable.ic_back_black);
-            }else{
-                btn.setImageResource(R.drawable.ic_back_white);
-            }
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ((Activity)context).finish();
-                }
-            });
-        }
     }
 
     /**

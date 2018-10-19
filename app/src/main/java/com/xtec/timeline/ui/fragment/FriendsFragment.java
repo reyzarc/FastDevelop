@@ -14,6 +14,7 @@ import com.xtec.timeline.R;
 import com.xtec.timeline.utils.L;
 import com.xtec.timeline.utils.UIUtils;
 import com.xtec.timeline.widget.MultiStateView;
+import com.xtec.timeline.widget.Topbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,11 +29,7 @@ import in.srain.cube.views.ptr.PtrHandler;
  */
 public class FriendsFragment extends Fragment {
     private static final String TAG = "FriendsFragment";
-    @BindView(R.id.topbar_left)
-    ImageButton topbarLeft;
-    @BindView(R.id.topbar_title)
-    TextView topbarTitle;
-    @BindView(R.id.topbar_right)
+
     ImageButton topbarRight;
     @BindView(R.id.mv_state)
     MultiStateView mvState;
@@ -40,6 +37,8 @@ public class FriendsFragment extends Fragment {
     PtrClassicFrameLayout ptrFrame;
     @BindView(R.id.tv)
     TextView tv;
+    @BindView(R.id.topbar)
+    Topbar topbar;
 
     private View view;
     private CountDownTimer timer;
@@ -55,7 +54,7 @@ public class FriendsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_friends, null);
-        View topBar = view.findViewById(R.id.friends_topbar);
+        View topBar = view.findViewById(R.id.topbar);
         UIUtils.initTopbar(getActivity(), topBar, false);
         ((TextView) topBar.findViewById(R.id.topbar_title)).setText("朋友");
         topBar.setBackgroundColor(getResources().getColor(R.color.green));
@@ -82,10 +81,10 @@ public class FriendsFragment extends Fragment {
             public void onRefreshBegin(PtrFrameLayout frame) {
                 mvState.setViewState(MultiStateView.ViewState.CONTENT);
                 // do something...
-                timer =  new CountDownTimer(10000, 1000) {
+                timer = new CountDownTimer(10000, 1000) {
                     @Override
                     public void onTick(long l) {
-                        tv.setText(l/1000+"");
+                        tv.setText(l / 1000 + "");
                     }
 
                     @Override
@@ -106,5 +105,10 @@ public class FriendsFragment extends Fragment {
             timer.cancel();
             timer = null;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
 }
