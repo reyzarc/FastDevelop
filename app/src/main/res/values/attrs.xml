@@ -89,4 +89,40 @@
         <attr name="arc_height" format="dimension"/>
         <attr name="background_color" format="color"/>
     </declare-styleable>
+
+    <!-- PagerSlidingTabStrip attr -->
+    <declare-styleable name="PagerSlidingTabStrip">
+
+        <!-- 指示器的颜色 -->
+        <attr name="pstsIndicatorColor" format="color" />
+        <!-- Tab下划线的颜色 -->
+        <attr name="pstsUnderlineColor" format="color" />
+        <!-- tab之间分割线的颜色 -->
+        <attr name="pstsDividerColor" format="color" />
+        <!-- 实施期的高度 -->
+        <attr name="pstsIndicatorHeight" format="dimension" />
+        <!--指示器宽度-->
+        <attr name="pstsDividerWidth" format="dimension" />
+        <!-- tab下划线的高度 -->
+        <attr name="pstsUnderlineHeight" format="dimension" />
+        <!-- tab分割线的间距 -->
+        <attr name="pstsDividerPadding" format="dimension" />
+        <attr name="pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="pstsScrollOffset" format="dimension" />
+        <attr name="pstsTabBackground" format="reference" />
+        <attr name="pstsShouldExpand" format="boolean" />
+        <attr name="pstsTextAllCaps" format="boolean" />
+        <attr name="pstsTextClick" format="boolean" />
+        <attr name="pstsSelectedTabTextColor" format="color" />
+        <attr name="pstsUserIndicatorTextWidth" format="boolean" />
+        <attr name="pstsPaddingMiddle" format="boolean" />
+        <attr name="pstsTextStyle" format="reference" />
+        <attr name="pstsTextSelectedStyle" format="reference" />
+        <attr name="pstsTextAlpha" format="float" />
+        <attr name="pstsTextSelectedAlpha" format="float" />
+        <!-- Color of regular titles. -->
+        <attr name="android:textColor" />
+        <!-- Size of title text. -->
+        <attr name="android:textSize" />
+    </declare-styleable>
 </resources>
