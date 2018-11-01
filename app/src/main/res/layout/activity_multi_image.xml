@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.xtec.timeline.widget.Topbar
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:back_enable="true"
+        app:title="带数字进度条"
+        app:topbar_color="@color/red"/>
+
+    <com.xtec.timeline.widget.MultiImageView
+        android:id="@+id/multi_image_view"
+        android:layout_height="200dp"
+        android:layout_width="match_parent"/>
+
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_image_one"
+        style="@style/orange_btn_style"
+        android:text="1张图片"/>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_image_two"
+        style="@style/orange_btn_style"
+        android:text="2张图片"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_image_three"
+        style="@style/orange_btn_style"
+        android:text="3张图片"/>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_image_more"
+        style="@style/orange_btn_style"
+        android:text="4张及以上图片"/>
+
+
+
+</LinearLayout>

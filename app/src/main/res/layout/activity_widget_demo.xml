@@ -96,6 +96,11 @@
                 style="@style/orange_btn_style"
                 android:text="弧形view"/>
 
+            <Button
+                android:id="@+id/btn_multi_image_view"
+                style="@style/orange_btn_style"
+                android:text="多图显示"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

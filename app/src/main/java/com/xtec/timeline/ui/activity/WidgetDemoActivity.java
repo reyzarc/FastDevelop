@@ -53,6 +53,8 @@ public class WidgetDemoActivity extends BaseActivity {
     Button btnCircleWave;
     @BindView(R.id.btn_arc_view)
     Button btnArcView;
+    @BindView(R.id.btn_multi_image_view)
+    Button btnMultiImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class WidgetDemoActivity extends BaseActivity {
         initTopbar(this, topbar);
     }
 
-    @OnClick({R.id.btn_arc_view,R.id.btn_circle_wave, R.id.btn_animation_button, R.id.btn_light_control, R.id.btn_progress_bar, R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
+    @OnClick({R.id.btn_multi_image_view,R.id.btn_arc_view, R.id.btn_circle_wave, R.id.btn_animation_button, R.id.btn_light_control, R.id.btn_progress_bar, R.id.btn_baidu_map, R.id.btn_num_keyboard, R.id.btn_pwd_edit_text, R.id.btn_format_edit_text, R.id.btn_circle_progress, R.id.btn_fast_dialog, R.id.btn_progress_wheel, R.id.btn_square_image, R.id.btn_zoom_seek_bar})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_num_keyboard://数字键盘
@@ -110,6 +112,9 @@ public class WidgetDemoActivity extends BaseActivity {
                 break;
             case R.id.btn_arc_view://弧形
                 startActivity(new Intent(this, ArcViewActivity.class));
+                break;
+            case R.id.btn_multi_image_view://多图显示
+                startActivity(new Intent(this, MultiImageViewActivity.class));
                 break;
         }
     }
