@@ -85,6 +85,7 @@ public class MultiImageViewActivity extends BaseActivity {
                 mImageList.add("http://img1.imgtn.bdimg.com/it/u=2388983070,3514068383&fm=200&gp=0.jpg");
                 mImageList.add("http://img3.imgtn.bdimg.com/it/u=4038700540,2625172863&fm=200&gp=0.jpg");
 
+
                 break;
         }
         multiImageView.setImageList(mImageList);

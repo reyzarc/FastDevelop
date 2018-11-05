@@ -32,7 +32,7 @@
             android:id="@+id/iv_two_right"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher" />
@@ -56,9 +56,10 @@
             android:src="@drawable/ic_launcher" />
 
         <LinearLayout
+            android:id="@+id/ll_three_right"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="2"
             android:orientation="vertical">
 
@@ -71,6 +72,7 @@
                 android:src="@drawable/ic_launcher" />
 
             <FrameLayout
+                android:id="@+id/fl_three_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"

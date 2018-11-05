@@ -5,13 +5,14 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.xtec.timeline.R;
+import com.xtec.timeline.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,8 @@ public class MultiImageView extends LinearLayout implements View.OnClickListener
     ImageView ivThreeRightBottom;
     LinearLayout llThreeImages;
     TextView tvMoreImages;
+    LinearLayout llThreeRight;
+    FrameLayout flThreeBottom;
 
     private View mView;
     private Context mContext;
@@ -67,6 +70,8 @@ public class MultiImageView extends LinearLayout implements View.OnClickListener
         tvMoreImages = (TextView) mView.findViewById(R.id.tv_more_images);
         llThreeImages = (LinearLayout) mView.findViewById(R.id.ll_three_images);
         llTwoImages = (LinearLayout) mView.findViewById(R.id.ll_two_images);
+        llThreeRight = (LinearLayout) mView.findViewById(R.id.ll_three_right);
+        flThreeBottom = (FrameLayout) mView.findViewById(R.id.fl_three_bottom);
 
         ivOneImage.setOnClickListener(this);
         ivTwoLeft.setOnClickListener(this);
@@ -75,7 +80,7 @@ public class MultiImageView extends LinearLayout implements View.OnClickListener
         ivThreeRightTop.setOnClickListener(this);
         ivThreeRightBottom.setOnClickListener(this);
 
-        LinearLayout.LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         addView(mView, lp);
     }
 
@@ -130,6 +135,15 @@ public class MultiImageView extends LinearLayout implements View.OnClickListener
     public interface OnImageClickListener {
         void onImageClick();
     }
+
+    public void setSpace(int space){
+        int margin = UIUtils.dip2px(mContext,space);
+
+        UIUtils.setMargins(ivTwoRight,margin,0,0,0);
+        UIUtils.setMargins(llThreeRight,margin,0,0,0);
+        UIUtils.setMargins(flThreeBottom,0,margin,0,0);
+    }
+
 
 
 }
